@@ -7,6 +7,17 @@ export const entrada =
 /** Mesma caixa da `entrada`, mais a seta desenhada por nós (ver globals.css). */
 export const selecao = `${entrada} selecao`;
 
+/** Botão sólido. Pílula, como os do site — o painel usa a mesma linguagem. */
+export const botao =
+  "eyebrow inline-flex shrink-0 items-center justify-center rounded-full bg-tinta px-6 py-3.5 text-branco transition-colors hover:bg-verde";
+
+/** Etiqueta de estado numa lista: publicado, no carrossel, rascunho. */
+export const etiqueta = "eyebrow rounded-full px-2.5 py-1";
+
+/** Botão do `<input type="file">`, que o navegador não deixa herdar estilo. */
+export const arquivo =
+  "text-sm file:mr-4 file:rounded-full file:border file:border-linha file:bg-branco file:px-4 file:py-2 file:text-xs file:uppercase file:tracking-widest hover:file:border-verde";
+
 export function Campo({
   label,
   dica,

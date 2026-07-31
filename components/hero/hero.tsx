@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { Seta } from "@/components/ui/seta";
 import { useDados } from "@/lib/store";
 import { dataCurta, ehFuturo } from "@/lib/utils";
 
@@ -63,7 +64,11 @@ export function Hero() {
 
   return (
     <div ref={palcoRef} className="px-3 pt-3 sm:px-5 sm:pt-5">
-      <section className="relative isolate flex min-h-[78svh] flex-col justify-end overflow-hidden rounded-3xl bg-mata text-branco sm:rounded-4xl">
+      {/* Altura fixa: cada banner tem um texto de tamanho diferente e a hero
+          não pode pular de altura ao trocar de slide. `min-h-max` é a válvula
+          — se algum título editado no admin crescer demais, cresce em vez de
+          cortar. */}
+      <section className="relative isolate flex h-[78svh] min-h-max flex-col justify-end overflow-hidden rounded-3xl bg-mata text-branco sm:rounded-4xl">
         {slides.map((slide, i) =>
           slide.imagem ? (
             // eslint-disable-next-line @next/next/no-img-element -- fonte é data URL do admin, sem otimizador
@@ -92,17 +97,17 @@ export function Hero() {
         {total > 1 ? (
           <div className="pointer-events-none absolute inset-y-0 left-0 right-0 z-10 flex items-center justify-between px-3 sm:px-5">
             {[
-              { passo: -1, seta: "←", rotulo: "Slide anterior" },
-              { passo: 1, seta: "→", rotulo: "Próximo slide" },
+              { passo: -1, para: "esquerda", rotulo: "Slide anterior" },
+              { passo: 1, para: "direita", rotulo: "Próximo slide" },
             ].map((b) => (
               <button
                 key={b.passo}
                 type="button"
                 onClick={() => ir(b.passo)}
                 aria-label={b.rotulo}
-                className="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full border border-branco/25 bg-tinta/25 text-xl text-branco backdrop-blur-md transition-all hover:scale-110 hover:border-verde hover:bg-verde"
+                className="pointer-events-auto flex size-12 items-center justify-center rounded-full border border-branco/25 bg-tinta/25 text-xl text-branco backdrop-blur-md transition-all hover:scale-110 hover:border-verde hover:bg-verde"
               >
-                <span aria-hidden>{b.seta}</span>
+                <Seta para={b.para as "esquerda" | "direita"} />
               </button>
             ))}
           </div>

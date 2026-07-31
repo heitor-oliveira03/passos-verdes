@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { botao, etiqueta } from "@/components/ui/campo";
 import { useDados } from "@/lib/store";
 import { MODALIDADES } from "@/lib/types";
 import { dataCurta, ano, ehFuturo } from "@/lib/utils";
@@ -21,7 +22,7 @@ export default function AdminEventos() {
         </div>
         <Link
           href="/admin/eventos/novo"
-          className="eyebrow shrink-0 bg-tinta px-5 py-3.5 text-branco transition-colors hover:bg-verde"
+          className={botao}
         >
           Novo evento
         </Link>
@@ -50,12 +51,10 @@ export default function AdminEventos() {
               </div>
 
               <span
-                className={`eyebrow px-2 py-1 ${
-                  !evento.publicado
-                    ? "rounded-full border border-linha px-2 text-musgo"
-                    : ehFuturo(evento)
-                      ? "bg-verde-claro text-verde"
-                      : "rounded-full border border-linha px-2 text-musgo"
+                className={`${etiqueta} ${
+                  evento.publicado && ehFuturo(evento)
+                    ? "bg-verde-claro text-verde"
+                    : "border border-linha text-musgo"
                 }`}
               >
                 {!evento.publicado

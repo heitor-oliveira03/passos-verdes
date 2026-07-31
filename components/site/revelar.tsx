@@ -9,7 +9,17 @@ type Props = {
   className?: string;
 };
 
-/** Revelação no scroll. Um único padrão para o site inteiro, sem variações. */
+/**
+ * Revelação no scroll. Um único padrão para o site inteiro, sem variações.
+ *
+ * IntersectionObserver + transição CSS em vez do ScrollTrigger do GSAP: o
+ * plugin mede a posição do gatilho no momento em que carrega e não remedia
+ * sozinho quando a foto abaixo dele entra e empurra a página — o bloco ficava
+ * preso em opacidade 0 para sempre. O observer reage ao layout real.
+ *
+ * O estado escondido é aplicado por JS, nunca no HTML: se o script falhar, o
+ * conteúdo aparece.
+ */
 export function Revelar({ children, seletor, className }: Props) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -18,35 +28,35 @@ export function Revelar({ children, seletor, className }: Props) {
     if (!elemento) return;
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    let matar: (() => void) | undefined;
+    const alvos = seletor
+      ? Array.from(elemento.querySelectorAll<HTMLElement>(seletor))
+      : [elemento];
+    if (alvos.length === 0) return;
 
-    Promise.all([import("gsap"), import("gsap/ScrollTrigger")]).then(
-      ([{ gsap }, { ScrollTrigger }]) => {
-        gsap.registerPlugin(ScrollTrigger);
-
-        const alvos = seletor
-          ? Array.from(elemento.querySelectorAll(seletor))
-          : [elemento];
-        if (alvos.length === 0) return;
-
-        const animacao = gsap.from(alvos, {
-          y: 28,
-          opacity: 0,
-          duration: 0.9,
-          ease: "power3.out",
-          stagger: seletor ? 0.07 : 0,
-          scrollTrigger: { trigger: elemento, start: "top 85%" },
-        });
-
-        matar = () => {
-          animacao.scrollTrigger?.kill();
-          animacao.kill();
-          gsap.set(alvos, { clearProps: "all" });
-        };
+    const observador = new IntersectionObserver(
+      (entradas) => {
+        for (const entrada of entradas) {
+          if (!entrada.isIntersecting) continue;
+          (entrada.target as HTMLElement).dataset.revelar = "visivel";
+          observador.unobserve(entrada.target);
+        }
       },
+      { rootMargin: "0px 0px -12% 0px" },
     );
 
-    return () => matar?.();
+    alvos.forEach((alvo, i) => {
+      alvo.dataset.revelar = "";
+      alvo.style.transitionDelay = `${i * 70}ms`;
+      observador.observe(alvo);
+    });
+
+    return () => {
+      observador.disconnect();
+      alvos.forEach((alvo) => {
+        delete alvo.dataset.revelar;
+        alvo.style.transitionDelay = "";
+      });
+    };
   }, [seletor]);
 
   return (

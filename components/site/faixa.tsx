@@ -1,7 +1,13 @@
-/** Faixa de imagem larga, para quebrar blocos de texto longos. */
+/**
+ * Faixa de imagem larga, para quebrar blocos de texto longos.
+ *
+ * Respiro igual dos quatro lados: a faixa encosta em cartões arredondados
+ * (linha do tempo, parceiros) e sem o gap vertical os dois viram um bloco só.
+ * Mesma medida da calha lateral do site.
+ */
 export function Faixa({ src, alt }: { src: string; alt: string }) {
   return (
-    <div className="px-3 sm:px-5">
+    <div className="p-3 sm:p-5">
       {/* eslint-disable-next-line @next/next/no-img-element -- foto local, mesmo caminho das outras */}
       <img
         src={src}

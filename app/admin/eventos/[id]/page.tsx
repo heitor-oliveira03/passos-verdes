@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { ImagemEvento } from "@/components/site/imagem-evento";
-import { Campo, entrada, selecao } from "@/components/ui/campo";
+import { arquivo, botao, Campo, entrada, selecao } from "@/components/ui/campo";
 import {
   eventoVazio,
   removerEvento,
@@ -230,7 +230,7 @@ export default function EditarEvento() {
                 type="file"
                 accept="image/*"
                 onChange={(e) => aoEscolherImagem(e.target.files?.[0])}
-                className="text-sm file:mr-4 file:border file:border-linha file:bg-branco file:px-4 file:py-2 file:text-xs file:uppercase file:tracking-widest hover:file:border-verde"
+                className={arquivo}
               />
               <p className="text-xs text-musgo">
                 A imagem é reduzida para 1400 px de largura ao salvar. Sem
@@ -270,7 +270,7 @@ export default function EditarEvento() {
         <div className="flex flex-wrap items-center gap-4 sm:col-span-2">
           <button
             type="submit"
-            className="eyebrow bg-tinta px-6 py-4 text-branco transition-colors hover:bg-verde"
+            className={botao}
           >
             Salvar evento
           </button>
@@ -309,7 +309,7 @@ export default function EditarEvento() {
               type="button"
               disabled={participantes.length === 0}
               onClick={() => baixarPlanilha(evento, participantes)}
-              className="eyebrow bg-tinta px-5 py-3.5 text-branco transition-colors hover:bg-verde disabled:cursor-not-allowed disabled:bg-linha disabled:text-musgo"
+              className={`${botao} disabled:cursor-not-allowed disabled:bg-linha disabled:text-musgo`}
             >
               Baixar planilha
             </button>

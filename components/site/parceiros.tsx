@@ -22,7 +22,7 @@ const PARCEIROS = [
 export function Parceiros() {
   return (
     <section id="parceiros" className="scroll-mt-20 overflow-hidden py-20">
-      <p className="eyebrow mx-auto max-w-350 px-6 text-center text-musgo sm:px-12">
+      <p className="eyebrow mx-auto max-w-350 px-6 text-center sm:px-12 text-verde">
         Nossos apoiadores
       </p>
 

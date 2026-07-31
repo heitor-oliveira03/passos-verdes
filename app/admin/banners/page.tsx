@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Campo, entrada } from "@/components/ui/campo";
+import { arquivo, botao, Campo, entrada, etiqueta } from "@/components/ui/campo";
 import {
   bannerVazio,
   removerBanner,
@@ -28,7 +28,7 @@ export default function AdminBanners() {
         <button
           type="button"
           onClick={() => setEmEdicao(bannerVazio())}
-          className="eyebrow shrink-0 bg-tinta px-5 py-3.5 text-branco transition-colors hover:bg-verde"
+          className={botao}
         >
           Novo banner
         </button>
@@ -51,10 +51,10 @@ export default function AdminBanners() {
             </span>
 
             <span
-              className={`eyebrow px-2 py-1 ${
+              className={`${etiqueta} ${
                 banner.ativo
                   ? "bg-verde-claro text-verde"
-                  : "rounded-full border border-linha px-2 text-musgo"
+                  : "border border-linha text-musgo"
               }`}
             >
               {banner.ativo ? "No carrossel" : "Inativo"}
@@ -159,7 +159,7 @@ function FormularioBanner({
             type="file"
             accept="image/*"
             onChange={(e) => aoEscolherImagem(e.target.files?.[0])}
-            className="text-sm file:mr-4 file:border file:border-linha file:bg-branco file:px-4 file:py-2 file:text-xs file:uppercase file:tracking-widest hover:file:border-verde"
+            className={arquivo}
           />
           {imagem ? (
             <button
@@ -254,7 +254,7 @@ function FormularioBanner({
       <div className="flex gap-4 sm:col-span-2">
         <button
           type="submit"
-          className="eyebrow bg-tinta px-6 py-4 text-branco transition-colors hover:bg-verde"
+          className={botao}
         >
           Salvar banner
         </button>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Seta } from "@/components/ui/seta";
 
 /**
  * Quem monta a prova, um de cada vez. Não passa pelo admin: a equipe muda
@@ -11,32 +12,28 @@ import { useState } from "react";
  */
 const TIME = [
   {
-    nome: "Rafael Nogueira",
-    cargo: "Direção de prova",
+    nome: "Guilherme Nogueira",
+    cargo: "Criador e maratonista",
     foto: "/imagens/time/rafael.jpg",
-    texto:
-      "Desenha o percurso e caminha o trajeto inteiro na véspera. Corre desde 2011 e já cruzou seis maratonas.",
+    texto: "Guilherme é o criador....",
   },
   {
-    nome: "Marina Salles",
-    cargo: "Operações e kit",
+    nome: "Steffani Magalhães",
+    cargo: "Maratonista",
     foto: "/imagens/time/marina.jpg",
-    texto:
-      "Cuida da retirada de kit, do guarda-volumes e da fila que ninguém quer pegar. Se a largada saiu no horário, foi ela.",
+    texto: "criadora.....",
   },
   {
-    nome: "Caio Ferraz",
-    cargo: "Percurso e sinalização",
+    nome: "Thiago SOuza",
+    cargo: "Percurso",
     foto: "/imagens/time/caio.jpg",
-    texto:
-      "Responsável pelos balizadores, cones e pela equipe de batedores. Trabalha com trail desde a primeira edição.",
+    texto: "Trabalha com ed. fisica desde a primeira edição.",
   },
   {
-    nome: "Tiago Lemos",
-    cargo: "Cronometragem",
+    nome: "Theo Gouveia",
+    cargo: "Maratonista",
     foto: "/imagens/time/tiago.jpg",
-    texto:
-      "Monta o portal de chip e publica o resultado no mesmo dia — inclusive de quem termina por último.",
+    texto: "Maratonista",
   },
 ];
 
@@ -76,17 +73,17 @@ export function Time() {
 
         <div className="mt-12 flex items-center gap-4">
           {[
-            { passo: -1, seta: "←", rotulo: "Pessoa anterior" },
-            { passo: 1, seta: "→", rotulo: "Próxima pessoa" },
+            { passo: -1, para: "esquerda", rotulo: "Pessoa anterior" },
+            { passo: 1, para: "direita", rotulo: "Próxima pessoa" },
           ].map((b) => (
             <button
               key={b.passo}
               type="button"
               onClick={() => ir(b.passo)}
               aria-label={b.rotulo}
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-linha bg-branco text-lg transition-all hover:scale-110 hover:border-verde hover:text-verde"
+              className="flex size-11 items-center justify-center rounded-full border border-linha bg-branco text-lg transition-all hover:scale-110 hover:border-verde hover:text-verde"
             >
-              <span aria-hidden>{b.seta}</span>
+              <Seta para={b.para as "esquerda" | "direita"} />
             </button>
           ))}
 

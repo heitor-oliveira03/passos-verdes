@@ -100,6 +100,20 @@
     }
   }
 
+  /* Estados da revelação no scroll (ver components/site/revelar.tsx). */
+  [data-revelar] {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+      opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  [data-revelar="visivel"] {
+    opacity: 1;
+    transform: none;
+  }
+
   /* Rótulos de dado: distância, data, pace, edição. */
   .eyebrow {
     font-family: var(--font-mono);
