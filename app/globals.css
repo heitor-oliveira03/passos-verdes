@@ -72,6 +72,19 @@
     text-transform: uppercase;
   }
 
+  /**
+   * Select com seta própria. O painel aberto continua sendo do sistema — isso
+   * o CSS não alcança —, então o que dá para controlar é o estado fechado.
+   */
+  .selecao {
+    appearance: none;
+    padding-right: 2.75rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5l5-5' fill='none' stroke='%230fa958' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1.125rem center;
+    background-size: 0.75rem;
+  }
+
   /* Esteira infinita dos parceiros: duas cópias da lista, -50% de deslocamento. */
   .esteira {
     animation: esteira 38s linear infinite;

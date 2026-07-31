@@ -42,13 +42,27 @@ export function FormularioContato() {
         />
       </Campo>
 
-      <Campo label="Assunto" className="sm:col-span-2">
-        <select name="assunto" defaultValue={ASSUNTOS[0]} className={entrada}>
-          {ASSUNTOS.map((a) => (
-            <option key={a}>{a}</option>
+      {/* Cinco opções curtas cabem na tela: viram escolha à vista, no lugar de
+          um dropdown cujo painel aberto é do sistema operacional. */}
+      <fieldset className="sm:col-span-2">
+        <legend className="eyebrow text-musgo">Assunto</legend>
+        <div className="mt-3 flex flex-wrap gap-2">
+          {ASSUNTOS.map((assunto, i) => (
+            <label key={assunto} className="cursor-pointer">
+              <input
+                type="radio"
+                name="assunto"
+                value={assunto}
+                defaultChecked={i === 0}
+                className="peer sr-only"
+              />
+              <span className="eyebrow block rounded-full border border-linha bg-branco px-4 py-3 text-musgo transition-colors hover:border-musgo peer-checked:border-tinta peer-checked:bg-tinta peer-checked:text-branco peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-verde">
+                {assunto}
+              </span>
+            </label>
           ))}
-        </select>
-      </Campo>
+        </div>
+      </fieldset>
 
       <Campo label="Mensagem" className="sm:col-span-2">
         <textarea name="mensagem" required rows={6} className={entrada} />

@@ -10,9 +10,9 @@ export const metadata: Metadata = {
 export default function Eventos() {
   return (
     <>
-      <section className="mx-auto max-w-350 px-5 pb-16 pt-20 sm:px-8 sm:pt-28">
+      <section className="@container mx-auto max-w-350 px-5 pb-16 pt-20 sm:px-8 sm:pt-28">
         <p className="eyebrow text-verde">Calendário</p>
-        <h1 className="display mt-6 max-w-4xl text-[13vw] leading-[0.84] sm:text-[8rem]">
+        <h1 className="display mt-6 max-w-4xl text-[12cqw] leading-[0.84] sm:text-[8rem]">
           Todas as
           <br />
           largadas

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { ImagemEvento } from "@/components/site/imagem-evento";
-import { Campo, entrada } from "@/components/ui/campo";
+import { Campo, entrada, selecao } from "@/components/ui/campo";
 import {
   eventoVazio,
   removerEvento,
@@ -130,7 +130,7 @@ export default function EditarEvento() {
           <select
             name="modalidade"
             defaultValue={evento.modalidade}
-            className={entrada}
+            className={selecao}
           >
             {Object.entries(MODALIDADES).map(([valor, rotulo]) => (
               <option key={valor} value={valor}>

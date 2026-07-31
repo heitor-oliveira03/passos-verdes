@@ -59,11 +59,12 @@ const PRINCIPIOS = [
 export default function Sobre() {
   return (
     <>
-      <section className="mx-auto max-w-350 px-5 pb-20 pt-20 sm:px-8 sm:pt-28">
+      <section className="@container mx-auto max-w-350 px-5 pb-20 pt-20 sm:px-8 sm:pt-28">
         <p className="eyebrow text-verde">Sobre nós</p>
-        <h1 className="display mt-6 max-w-5xl text-[13vw] leading-[0.84] sm:text-[8rem]">
-          Sete anos
-          <br />
+        <h1 className="display mt-6 max-w-5xl text-[12cqw] leading-[0.84] sm:text-[8rem]">
+          Sete anos{" "}
+          {/* No celular a linha quebra sozinha: forçar o corte estoura a tela. */}
+          <br className="hidden sm:inline" />
           montando largada
         </h1>
         <p className="mt-10 max-w-xl text-lg text-musgo">

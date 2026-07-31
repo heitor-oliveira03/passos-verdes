@@ -52,7 +52,7 @@ export default function PaginaDoEvento() {
 
   return (
     <>
-      <section className="mx-auto max-w-350 px-5 pb-14 pt-16 sm:px-8 sm:pt-20">
+      <section className="@container mx-auto max-w-350 px-5 pb-14 pt-16 sm:px-8 sm:pt-20">
         <Link href="/eventos" className="eyebrow text-musgo hover:text-verde">
           ← Calendário
         </Link>
@@ -60,7 +60,7 @@ export default function PaginaDoEvento() {
         <p className="eyebrow mt-10 text-verde">
           {MODALIDADES[evento.modalidade]} · {evento.edicao}ª edição
         </p>
-        <h1 className="display mt-5 max-w-5xl text-[13vw] leading-[0.84] sm:text-[8rem]">
+        <h1 className="display mt-5 max-w-5xl text-[12cqw] leading-[0.84] sm:text-[8rem]">
           {evento.nome}
         </h1>
       </section>

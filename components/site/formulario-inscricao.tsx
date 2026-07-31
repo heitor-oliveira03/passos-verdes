@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Campo, entrada } from "@/components/ui/campo";
+import { Campo, entrada, selecao } from "@/components/ui/campo";
 import { inscrever } from "@/lib/store";
 import type { Camiseta, Evento } from "@/lib/types";
 import { preco } from "@/lib/utils";
@@ -81,7 +81,7 @@ export function FormularioInscricao({ evento }: { evento: Evento }) {
       </Campo>
 
       <Campo label="Sexo">
-        <select name="sexo" required defaultValue="F" className={entrada}>
+        <select name="sexo" required defaultValue="F" className={selecao}>
           <option value="F">Feminino</option>
           <option value="M">Masculino</option>
           <option value="Outro">Outro</option>
@@ -93,7 +93,7 @@ export function FormularioInscricao({ evento }: { evento: Evento }) {
           name="distancia"
           required
           defaultValue={evento.distancias[0]}
-          className={entrada}
+          className={selecao}
         >
           {evento.distancias.map((d) => (
             <option key={d} value={d}>
@@ -104,7 +104,7 @@ export function FormularioInscricao({ evento }: { evento: Evento }) {
       </Campo>
 
       <Campo label="Camiseta">
-        <select name="camiseta" required defaultValue="M" className={entrada}>
+        <select name="camiseta" required defaultValue="M" className={selecao}>
           {CAMISETAS.map((c) => (
             <option key={c} value={c}>
               {c}
