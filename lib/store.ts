@@ -11,7 +11,9 @@ import type { Banner, Dados, Evento, Inscricao } from "./types";
  * verdade, só as funções exportadas daqui mudam — nenhuma tela precisa saber.
  */
 
-const CHAVE = "passos-verdes/dados/v1";
+// v2: seed ganhou banner de trail e imagens. Subir a versão descarta o que
+// estava salvo no navegador — é o preço de a seed ainda ser a fonte da verdade.
+const CHAVE = "passos-verdes/dados/v2";
 const CHAVE_SESSAO = "passos-verdes/admin";
 const SENHA = "verde2026";
 

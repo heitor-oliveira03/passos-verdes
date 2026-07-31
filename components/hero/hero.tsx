@@ -22,11 +22,14 @@ export function Hero() {
   const palcoRef = useRef<HTMLDivElement>(null);
 
   const total = slides.length;
+  // `atual` na dependência: clicar na seta reinicia a contagem do slide.
   useEffect(() => {
     if (total < 2) return;
     const t = setInterval(() => setAtual((i) => (i + 1) % total), INTERVALO);
     return () => clearInterval(t);
-  }, [total]);
+  }, [total, atual]);
+
+  const ir = (passo: number) => setAtual((i) => (i + passo + total) % total);
 
   useEffect(() => {
     const palco = palcoRef.current;
@@ -77,6 +80,26 @@ export function Hero() {
         )}
         {/* Véu: a foto é fundo, o texto é o assunto. */}
         <div aria-hidden className="absolute inset-0 bg-tinta/55" />
+
+        {total > 1 ? (
+          // Alinhadas ao topo: o título ocupa a metade de baixo da hero.
+          <div className="pointer-events-none absolute inset-y-0 left-0 right-0 z-10 flex items-start justify-between px-2 pt-[16svh] sm:px-4">
+            {[
+              { passo: -1, seta: "←", rotulo: "Slide anterior" },
+              { passo: 1, seta: "→", rotulo: "Próximo slide" },
+            ].map((b) => (
+              <button
+                key={b.passo}
+                type="button"
+                onClick={() => ir(b.passo)}
+                aria-label={b.rotulo}
+                className="pointer-events-auto flex h-12 w-12 items-center justify-center border border-branco/30 bg-tinta/30 text-xl text-branco backdrop-blur-sm transition-colors hover:border-verde hover:bg-verde"
+              >
+                <span aria-hidden>{b.seta}</span>
+              </button>
+            ))}
+          </div>
+        ) : null}
 
         <div className="relative mx-auto w-full max-w-[1400px] px-5 pb-24 pt-16 sm:px-8 sm:pt-24">
           <p data-surge className="eyebrow text-verde">

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Faixa } from "@/components/site/faixa";
 import { Revelar } from "@/components/site/revelar";
 import { CIDADE } from "@/lib/seed";
 
@@ -93,6 +94,11 @@ export default function Sobre() {
           </Revelar>
         </div>
       </section>
+
+      <Faixa
+        src="/imagens/trail.svg"
+        alt="Corredores na trilha da serra ao amanhecer"
+      />
 
       <section className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8">
         <h2 className="display max-w-3xl text-5xl sm:text-7xl">

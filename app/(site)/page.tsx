@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Faixa } from "@/components/site/faixa";
 import { Hero } from "@/components/hero/hero";
 import { ProximosEventos } from "@/components/site/proximos-eventos";
 import { Revelar } from "@/components/site/revelar";
@@ -90,6 +91,11 @@ export default function Home() {
           </Revelar>
         </div>
       </section>
+
+      <Faixa
+        src="/imagens/rua.svg"
+        alt="Pelotão largando na avenida ao amanhecer, com a cidade ao fundo"
+      />
 
       <section className="mx-auto max-w-[1400px] px-5 py-28 sm:px-8">
         <Revelar className="flex flex-col items-start gap-8 sm:flex-row sm:items-end sm:justify-between">
