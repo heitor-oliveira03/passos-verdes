@@ -13,10 +13,10 @@ export const metadata: Metadata = {
 /** A cronologia é uma sequência de verdade — por isso ela é numerada por ano. */
 const LINHA_DO_TEMPO = [
   {
-    ano: "2019",
-    titulo: "A primeira noturna",
+    ano: "2025",
+    titulo: "A primeira corrida de Santo Aleixo",
     texto:
-      "140 corredores, 5 km, um percurso marcado com cones emprestados. A largada atrasou 12 minutos e ninguém reclamou.",
+      "2,5k de corredores, 7 km, um percurso com subidas, descidas e grandes retas. A largada é na praça de Andorinhas e a linha de chegada é na praça da Capela.",
   },
   {
     ano: "2021",
@@ -59,7 +59,7 @@ const PRINCIPIOS = [
 export default function Sobre() {
   return (
     <>
-      <section className="mx-auto max-w-[1400px] px-5 pb-20 pt-20 sm:px-8 sm:pt-28">
+      <section className="mx-auto max-w-350 px-5 pb-20 pt-20 sm:px-8 sm:pt-28">
         <p className="eyebrow text-verde">Sobre nós</p>
         <h1 className="display mt-6 max-w-5xl text-[13vw] leading-[0.84] sm:text-[8rem]">
           Sete anos
@@ -73,8 +73,8 @@ export default function Sobre() {
         </p>
       </section>
 
-      <section className="bg-cal">
-        <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8">
+      <section className="px-3 sm:px-5">
+        <div className="mx-auto max-w-350 rounded-3xl bg-cal px-6 py-24 sm:rounded-4xl sm:px-12">
           <p className="eyebrow text-musgo">Linha do tempo</p>
           <Revelar seletor="li" className="mt-10">
             <ol>
@@ -96,11 +96,11 @@ export default function Sobre() {
       </section>
 
       <Faixa
-        src="/imagens/trail.svg"
-        alt="Corredores na trilha da serra ao amanhecer"
+        src="/imagens/fotos/corredora.jpg"
+        alt="Corredora em prova de rua"
       />
 
-      <section className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8">
+      <section className="mx-auto max-w-350 px-5 py-24 sm:px-8">
         <h2 className="display max-w-3xl text-5xl sm:text-7xl">
           Como a gente trabalha
         </h2>
@@ -115,7 +115,7 @@ export default function Sobre() {
 
         <Link
           href="/eventos"
-          className="eyebrow mt-16 inline-flex items-center gap-3 bg-tinta px-6 py-4 text-branco transition-colors hover:bg-verde"
+          className="eyebrow mt-16 inline-flex items-center gap-3 rounded-full bg-tinta px-7 py-4 text-branco transition-all hover:scale-[1.03] hover:bg-verde"
         >
           Ver o calendário
           <span aria-hidden>→</span>

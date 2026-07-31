@@ -15,6 +15,21 @@
   --font-mono: var(--font-martian), ui-monospace, monospace;
 }
 
+/**
+ * Tema escuro do admin. Em vez de espalhar `dark:` por tela, a classe troca as
+ * próprias variáveis de cor do tema — toda utilitária (bg-branco, text-tinta,
+ * border-linha…) segue junto sem nenhuma alteração de markup.
+ */
+.tema-escuro {
+  --color-branco: #0f1512;
+  --color-cal: #080c0a;
+  --color-tinta: #eaf1ec;
+  --color-musgo: #90a396;
+  --color-linha: #26312b;
+  --color-verde-claro: #10331f;
+  color-scheme: dark;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -49,6 +64,21 @@
     line-height: 0.86;
     letter-spacing: -0.02em;
     text-transform: uppercase;
+  }
+
+  /* Esteira infinita dos parceiros: duas cópias da lista, -50% de deslocamento. */
+  .esteira {
+    animation: esteira 38s linear infinite;
+  }
+
+  .esteira:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes esteira {
+    to {
+      transform: translateX(-50%);
+    }
   }
 
   /* Rótulos de dado: distância, data, pace, edição. */

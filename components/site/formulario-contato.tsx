@@ -56,7 +56,7 @@ export function FormularioContato() {
 
       <button
         type="submit"
-        className="eyebrow bg-tinta px-6 py-4 text-branco transition-colors hover:bg-verde sm:col-span-2"
+        className="eyebrow rounded-full bg-tinta px-6 py-4 text-branco transition-all hover:scale-[1.02] hover:bg-verde sm:col-span-2"
       >
         Enviar mensagem
       </button>

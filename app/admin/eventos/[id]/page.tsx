@@ -104,7 +104,7 @@ export default function EditarEvento() {
 
       <form
         action={aoSalvar}
-        className="mt-10 grid gap-5 border border-linha bg-branco p-6 sm:grid-cols-2 sm:p-8"
+        className="mt-10 grid gap-5 rounded-2xl border border-linha bg-branco p-6 shadow-sm sm:grid-cols-2 sm:p-8"
       >
         <Campo label="Nome da prova">
           <input
@@ -222,7 +222,7 @@ export default function EditarEvento() {
         <div className="sm:col-span-2">
           <span className="eyebrow text-musgo">Imagem da prova</span>
           <div className="mt-3 grid gap-5 sm:grid-cols-[16rem_1fr]">
-            <div className="aspect-[4/3] overflow-hidden border border-linha bg-cal">
+            <div className="aspect-4/3 overflow-hidden rounded-2xl border border-linha bg-cal">
               <ImagemEvento evento={{ ...evento, imagem }} />
             </div>
             <div className="flex flex-col items-start gap-3">
@@ -315,8 +315,8 @@ export default function EditarEvento() {
             </button>
           </div>
 
-          <div className="mt-6 overflow-x-auto border border-linha bg-branco">
-            <table className="w-full min-w-[52rem] text-sm">
+          <div className="mt-6 overflow-x-auto rounded-2xl border border-linha bg-branco">
+            <table className="w-full min-w-208 text-sm">
               <thead>
                 <tr className="border-b border-linha text-left">
                   {[

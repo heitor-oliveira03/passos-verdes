@@ -13,7 +13,7 @@ export function ProximosEventos({ limite }: { limite?: number }) {
     .sort((a, b) => a.data.localeCompare(b.data));
 
   return (
-    <section className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8">
+    <section className="mx-auto max-w-350 px-5 py-24 sm:px-8">
       <div className="mb-10 flex items-end justify-between gap-6">
         <div>
           <p className="eyebrow text-verde">Calendário</p>

@@ -15,7 +15,7 @@ export default function PaginaDoEvento() {
 
   if (!evento) {
     return (
-      <section className="mx-auto max-w-[1400px] px-5 py-32 sm:px-8">
+      <section className="mx-auto max-w-350 px-5 py-32 sm:px-8">
         <p className="eyebrow text-verde">Prova não encontrada</p>
         <h1 className="display mt-6 text-5xl sm:text-7xl">
           Esse endereço não
@@ -52,7 +52,7 @@ export default function PaginaDoEvento() {
 
   return (
     <>
-      <section className="mx-auto max-w-[1400px] px-5 pb-14 pt-16 sm:px-8 sm:pt-20">
+      <section className="mx-auto max-w-350 px-5 pb-14 pt-16 sm:px-8 sm:pt-20">
         <Link href="/eventos" className="eyebrow text-musgo hover:text-verde">
           ← Calendário
         </Link>
@@ -65,13 +65,13 @@ export default function PaginaDoEvento() {
         </h1>
       </section>
 
-      <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
-        <div className="aspect-[16/7] w-full overflow-hidden bg-cal">
+      <div className="mx-auto max-w-350 px-5 sm:px-8">
+        <div className="aspect-16/7 w-full overflow-hidden rounded-3xl bg-cal">
           <ImagemEvento evento={evento} />
         </div>
       </div>
 
-      <section className="mx-auto max-w-[1400px] px-5 py-20 sm:px-8">
+      <section className="mx-auto max-w-350 px-5 py-20 sm:px-8">
         <dl className="grid gap-px border-t border-linha bg-linha sm:grid-cols-3">
           {ficha.map((item) => (
             <div key={item.rotulo} className="bg-branco py-6 pr-6">
@@ -84,8 +84,8 @@ export default function PaginaDoEvento() {
         <p className="mt-16 max-w-2xl text-lg text-musgo">{evento.descricao}</p>
       </section>
 
-      <section id="inscricao" className="bg-cal">
-        <div className="mx-auto grid max-w-[1400px] gap-14 px-5 py-24 sm:px-8 lg:grid-cols-[1fr_1.2fr]">
+      <section id="inscricao" className="mx-3 rounded-3xl bg-cal sm:mx-5 sm:rounded-4xl">
+        <div className="mx-auto grid max-w-350 gap-14 px-5 py-24 sm:px-8 lg:grid-cols-[1fr_1.2fr]">
           <div>
             <p className="eyebrow text-verde">
               {aberto ? "Inscrições abertas" : "Inscrições encerradas"}
@@ -103,7 +103,7 @@ export default function PaginaDoEvento() {
           {aberto ? (
             <FormularioInscricao evento={evento} />
           ) : (
-            <div className="self-start border border-linha bg-branco p-8">
+            <div className="self-start rounded-3xl border border-linha bg-branco p-8 shadow-sm">
               <p className="eyebrow text-musgo">Próximas provas</p>
               <Link
                 href="/eventos"

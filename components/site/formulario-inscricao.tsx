@@ -13,7 +13,7 @@ export function FormularioInscricao({ evento }: { evento: Evento }) {
 
   if (confirmado) {
     return (
-      <div className="border border-verde bg-verde-claro p-8">
+      <div className="rounded-3xl border border-verde bg-verde-claro p-8">
         <p className="eyebrow text-verde">Inscrição confirmada</p>
         <h3 className="display mt-4 text-3xl">
           Até {evento.horario}, {confirmado}.
@@ -119,7 +119,7 @@ export function FormularioInscricao({ evento }: { evento: Evento }) {
 
       <button
         type="submit"
-        className="eyebrow mt-2 bg-tinta px-6 py-4 text-branco transition-colors hover:bg-verde sm:col-span-2"
+        className="eyebrow mt-2 rounded-full bg-tinta px-6 py-4 text-branco transition-all hover:scale-[1.02] hover:bg-verde sm:col-span-2"
       >
         Confirmar inscrição · {preco(evento.preco)}
       </button>

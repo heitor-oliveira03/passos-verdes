@@ -34,11 +34,11 @@ export default function AdminBanners() {
         </button>
       </div>
 
-      <ul className="mt-10 border-t border-linha">
+      <ul className="mt-10 space-y-3">
         {banners.map((banner) => (
           <li
             key={banner.id}
-            className="flex flex-wrap items-center gap-x-6 gap-y-3 border-b border-linha bg-branco px-5 py-5"
+            className="flex flex-wrap items-center gap-x-6 gap-y-3 rounded-xl border border-linha bg-branco px-5 py-5"
           >
             <span className="min-w-0 flex-1">
               <span className="display block text-xl">
@@ -54,7 +54,7 @@ export default function AdminBanners() {
               className={`eyebrow px-2 py-1 ${
                 banner.ativo
                   ? "bg-verde-claro text-verde"
-                  : "border border-linha text-musgo"
+                  : "rounded-full border border-linha px-2 text-musgo"
               }`}
             >
               {banner.ativo ? "No carrossel" : "Inativo"}
@@ -138,7 +138,7 @@ function FormularioBanner({
   return (
     <form
       action={aoEnviar}
-      className="mt-12 grid gap-5 border border-linha bg-branco p-6 sm:grid-cols-2 sm:p-8"
+      className="mt-12 grid gap-5 rounded-2xl border border-linha bg-branco p-6 shadow-sm sm:grid-cols-2 sm:p-8"
     >
       <h2 className="display text-2xl sm:col-span-2">
         {banner.titulo ? "Editar banner" : "Novo banner"}
@@ -152,7 +152,7 @@ function FormularioBanner({
             <img
               src={imagem}
               alt=""
-              className="h-24 w-40 border border-linha object-cover"
+              className="h-24 w-40 rounded-lg border border-linha object-cover"
             />
           ) : null}
           <input

@@ -1,21 +1,23 @@
 import Link from "next/link";
 import { Faixa } from "@/components/site/faixa";
+import { Parceiros } from "@/components/site/parceiros";
+import { Time } from "@/components/site/time";
 import { Hero } from "@/components/hero/hero";
 import { ProximosEventos } from "@/components/site/proximos-eventos";
 import { Revelar } from "@/components/site/revelar";
 import { CIDADE } from "@/lib/seed";
 
 const NUMEROS = [
-  { valor: "2019", rotulo: "Primeira largada" },
+  { valor: "2025", rotulo: "Primeira largada" },
   { valor: "11,4 mil", rotulo: "Corredores inscritos" },
   { valor: "4", rotulo: "Provas por temporada" },
 ];
 
 const MODALIDADES_HOME = [
   {
-    nome: "Noturna",
+    nome: "Corrida de Santo Aleixo",
     texto:
-      "Largada às 19h30, percurso balizado por luz verde e a cidade parada para ver. É a prova que mais enche.",
+      "Largada às 10:00, percurso balizado por luz verde e a cidade parada para ver. É a prova que mais enche.",
   },
   {
     nome: "Kids",
@@ -23,7 +25,7 @@ const MODALIDADES_HOME = [
       "Baterias de 200 m a 1 km, dos 4 aos 12 anos. Sem cronômetro, sem pódio: medalha para quem cruzar a linha.",
   },
   {
-    nome: "Rua e trail",
+    nome: "Longão",
     texto:
       "De 5 km a 21 km no asfalto, mais uma prova de montanha por temporada. Cronometragem por chip nas duas.",
   },
@@ -34,7 +36,7 @@ export default function Home() {
     <>
       <Hero />
 
-      <section className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8">
+      <section className="mx-auto max-w-350 px-5 py-24 sm:px-8">
         <Revelar>
           <p className="eyebrow text-verde">Quem organiza</p>
           <h2 className="display mt-6 max-w-4xl text-5xl sm:text-7xl">
@@ -42,10 +44,10 @@ export default function Home() {
             <br />O resto a gente monta.
           </h2>
           <p className="mt-8 max-w-xl text-lg text-musgo">
-            A Passos Verdes começou em 2019 com uma noturna de 5 km e 140
-            corredores. Hoje são quatro provas por temporada em {CIDADE}, com
-            sinalização própria, cronometragem por chip e uma equipe que refaz o
-            percurso a pé na véspera de cada largada.
+            A Passos Verdes começou em 2025 com o intuito de trazer saúde e e
+            movimento para a comunidade de {CIDADE}. Nosso movimento ganhou
+            força e hoje já movimentamos a cidade inteira com muita animação,
+            amor, comprometimento com a saúde da comunidade e muita CORRIDA
           </p>
           <Link
             href="/sobre"
@@ -57,10 +59,10 @@ export default function Home() {
 
         <Revelar
           seletor="div"
-          className="mt-20 grid gap-px border-t border-linha bg-linha sm:grid-cols-3"
+          className="mt-20 grid gap-px overflow-hidden rounded-3xl bg-linha sm:grid-cols-3"
         >
           {NUMEROS.map((n) => (
-            <div key={n.rotulo} className="bg-branco pt-8">
+            <div key={n.rotulo} className="bg-branco p-8">
               <p className="display text-6xl sm:text-7xl">{n.valor}</p>
               <p className="eyebrow mt-4 text-musgo">{n.rotulo}</p>
             </div>
@@ -70,12 +72,12 @@ export default function Home() {
 
       <ProximosEventos limite={3} />
 
-      <section className="bg-mata text-branco">
-        <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8">
+      <section className="px-3 sm:px-5">
+        <div className="mx-auto max-w-350 rounded-3xl bg-mata px-6 py-24 text-branco sm:rounded-4xl sm:px-12">
           <Revelar>
             <p className="eyebrow text-verde">Três jeitos de correr</p>
             <h2 className="display mt-6 max-w-3xl text-5xl sm:text-7xl">
-              Correr no escuro
+              Correr com amigos
               <br />
               muda a cidade
             </h2>
@@ -92,21 +94,25 @@ export default function Home() {
         </div>
       </section>
 
+      <Time />
+
+      <Parceiros />
+
       <Faixa
-        src="/imagens/rua.svg"
+        src="/imagens/fotos/largada.jpg"
         alt="Pelotão largando na avenida ao amanhecer, com a cidade ao fundo"
       />
 
-      <section className="mx-auto max-w-[1400px] px-5 py-28 sm:px-8">
+      <section className="mx-auto max-w-350 px-5 py-28 sm:px-8">
         <Revelar className="flex flex-col items-start gap-8 sm:flex-row sm:items-end sm:justify-between">
           <h2 className="display max-w-2xl text-5xl sm:text-7xl">
             Quer correr com a gente?
           </h2>
           <Link
             href="/contato"
-            className="eyebrow inline-flex items-center gap-3 bg-tinta px-6 py-4 text-branco transition-colors hover:bg-verde"
+            className="eyebrow inline-flex items-center gap-3 rounded-full bg-tinta px-7 py-4 text-branco transition-all hover:scale-[1.03] hover:bg-verde"
           >
-            Falar com a organização
+            Fale com nosso time
             <span aria-hidden>→</span>
           </Link>
         </Revelar>

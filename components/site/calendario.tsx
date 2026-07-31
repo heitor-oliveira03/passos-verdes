@@ -18,10 +18,7 @@ export function Calendario() {
 
   return (
     <>
-      <section
-        id="proximos"
-        className="mx-auto max-w-[1400px] px-5 pb-24 sm:px-8"
-      >
+      <section id="proximos" className="mx-auto max-w-350 px-5 pb-24 sm:px-8">
         <p className="eyebrow text-verde">
           Próximos eventos · {proximos.length}
         </p>
@@ -30,8 +27,8 @@ export function Calendario() {
         </Revelar>
       </section>
 
-      <section id="passados" className="bg-cal">
-        <div className="mx-auto max-w-[1400px] px-5 py-24 sm:px-8">
+      <section id="passados" className="mx-3 rounded-3xl bg-cal sm:mx-5 sm:rounded-4xl">
+        <div className="mx-auto max-w-350 px-5 py-24 sm:px-8">
           <p className="eyebrow text-musgo">
             Eventos passados · {passados.length}
           </p>

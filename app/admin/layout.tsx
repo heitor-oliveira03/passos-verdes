@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import { Marca } from "@/components/site/cabecalho";
 import { Campo, entrada } from "@/components/ui/campo";
 import { entrar, sair, useAutenticado } from "@/lib/store";
@@ -13,6 +13,50 @@ const MENU = [
   { href: "/admin/eventos", label: "Eventos" },
 ];
 
+const CHAVE_TEMA = "passos-verdes/admin/tema";
+
+/**
+ * Tema do painel, no mesmo formato do resto do estado do app: fonte externa
+ * (localStorage) lida via useSyncExternalStore, para o servidor renderizar
+ * claro e o cliente corrigir sem divergência.
+ */
+const ouvintesDoTema = new Set<() => void>();
+
+function lerTema() {
+  try {
+    return localStorage.getItem(CHAVE_TEMA) === "escuro";
+  } catch {
+    return false;
+  }
+}
+
+function useTemaEscuro() {
+  return useSyncExternalStore(
+    (ouvir: () => void) => {
+      ouvintesDoTema.add(ouvir);
+      return () => ouvintesDoTema.delete(ouvir);
+    },
+    lerTema,
+    () => false,
+  );
+}
+
+function BotaoTema({ escuro }: { escuro: boolean }) {
+  return (
+    <button
+      type="button"
+      onClick={() => {
+        localStorage.setItem(CHAVE_TEMA, escuro ? "claro" : "escuro");
+        ouvintesDoTema.forEach((ouvir) => ouvir());
+      }}
+      aria-pressed={escuro}
+      className="eyebrow rounded-full border border-linha px-3 py-1.5 text-musgo transition-colors hover:border-verde hover:text-verde"
+    >
+      {escuro ? "Claro" : "Escuro"}
+    </button>
+  );
+}
+
 export default function LayoutDoAdmin({
   children,
 }: {
@@ -20,17 +64,20 @@ export default function LayoutDoAdmin({
 }) {
   const autenticado = useAutenticado();
   const caminho = usePathname();
+  const escuro = useTemaEscuro();
 
-  if (!autenticado) return <Login />;
+  if (!autenticado) return <Login escuro={escuro} />;
 
   return (
-    <div className="flex min-h-full flex-col bg-cal">
+    <div
+      className={`flex min-h-full flex-col bg-cal ${escuro ? "tema-escuro" : ""}`}
+    >
       <header className="border-b border-linha bg-branco">
-        <div className="mx-auto flex h-16 max-w-[1200px] items-center gap-8 px-5 sm:px-8">
+        <div className="mx-auto flex h-16 max-w-300 items-center gap-8 px-5 sm:px-8">
           <Link href="/" className="flex items-center gap-3">
             <Marca className="text-base" />
           </Link>
-          <span className="eyebrow border border-linha px-2 py-1 text-musgo">
+          <span className="eyebrow rounded-full border border-linha px-2.5 py-1 text-musgo">
             Admin
           </span>
 
@@ -53,6 +100,7 @@ export default function LayoutDoAdmin({
                 </Link>
               );
             })}
+            <BotaoTema escuro={escuro} />
             <button
               type="button"
               onClick={sair}
@@ -64,14 +112,14 @@ export default function LayoutDoAdmin({
         </div>
       </header>
 
-      <main className="mx-auto w-full max-w-[1200px] flex-1 px-5 py-12 sm:px-8">
+      <main className="mx-auto w-full max-w-300 flex-1 px-5 py-12 sm:px-8">
         {children}
       </main>
     </div>
   );
 }
 
-function Login() {
+function Login({ escuro }: { escuro: boolean }) {
   const [erro, setErro] = useState(false);
 
   function aoEnviar(dados: FormData) {
@@ -79,7 +127,9 @@ function Login() {
   }
 
   return (
-    <div className="flex min-h-full items-center justify-center bg-cal px-5 py-20">
+    <div
+      className={`flex min-h-full items-center justify-center bg-cal px-5 py-20 ${escuro ? "tema-escuro" : ""}`}
+    >
       <div className="w-full max-w-sm">
         <Marca />
         <h1 className="display mt-8 text-4xl">Painel da organização</h1>
@@ -110,7 +160,7 @@ function Login() {
 
           <button
             type="submit"
-            className="eyebrow w-full bg-tinta px-6 py-4 text-branco transition-colors hover:bg-verde"
+            className="eyebrow w-full rounded-full bg-tinta px-6 py-4 text-branco transition-colors hover:bg-verde"
           >
             Entrar
           </button>

@@ -1,7 +1,7 @@
 import type { Dados } from "./types";
 
 /** ponytail: troque pela cidade real da organização — só aparece em texto. */
-export const CIDADE = "Sorocaba";
+export const CIDADE = "Santo Aleixo";
 
 export const CONTATO = {
   email: "contato@passosverdes.com.br",
@@ -26,7 +26,7 @@ export const SEED: Dados = {
         ". Escolha a sua distância.",
       ctaLabel: "Ver calendário",
       ctaHref: "/eventos",
-      imagem: "/imagens/noturna.svg",
+      imagem: "/imagens/fotos/noturna.jpg",
       ativo: true,
     },
     {
@@ -38,7 +38,7 @@ export const SEED: Dados = {
         "Percursos de 200 m a 1 km para crianças de 4 a 12 anos, com medalha para todo mundo que cruzar a linha.",
       ctaLabel: "Inscrever a criançada",
       ctaHref: "/eventos",
-      imagem: "/imagens/kids.svg",
+      imagem: "/imagens/fotos/kids.jpg",
       ativo: true,
     },
     {
@@ -50,7 +50,7 @@ export const SEED: Dados = {
         "A primeira prova de montanha da Passos Verdes: 12 km e 24 km de trilha técnica, com dois pontos de hidratação.",
       ctaLabel: "Conhecer o percurso",
       ctaHref: "/eventos/trail-serra-2026",
-      imagem: "/imagens/trail.svg",
+      imagem: "/imagens/fotos/trail.jpg",
       ativo: true,
     },
   ],
@@ -68,7 +68,7 @@ export const SEED: Dados = {
       distancias: ["5 km", "10 km"],
       preco: 89,
       vagas: 1200,
-      imagem: "/imagens/noturna.svg",
+      imagem: "/imagens/fotos/noturna.jpg",
       descricao:
         "A prova que fechou o calendário do ano passado abre a temporada em 2026. Largada no anel do parque, percurso todo iluminado por balizadores verdes e chegada com a arquibancada cheia.",
       publicado: true,
@@ -86,7 +86,7 @@ export const SEED: Dados = {
       distancias: ["200 m", "500 m", "1 km"],
       preco: 35,
       vagas: 400,
-      imagem: "/imagens/kids.svg",
+      imagem: "/imagens/fotos/kids.jpg",
       descricao:
         "Baterias por faixa etária, dos 4 aos 12 anos. Cada criança escolhe a distância e leva medalha ao cruzar a linha. Acompanhante de um responsável liberado no percurso de 200 m.",
       publicado: true,
@@ -104,7 +104,7 @@ export const SEED: Dados = {
       distancias: ["5 km", "10 km", "21 km"],
       preco: 120,
       vagas: 2500,
-      imagem: "/imagens/rua.svg",
+      imagem: "/imagens/fotos/rua.jpg",
       descricao:
         "A prova mais antiga da Passos Verdes, e a única com meia maratona. Percurso plano à beira do rio, cronometragem por chip e pelotão de elite na frente.",
       publicado: true,
@@ -122,7 +122,7 @@ export const SEED: Dados = {
       distancias: ["12 km", "24 km"],
       preco: 150,
       vagas: 600,
-      imagem: "/imagens/trail.svg",
+      imagem: "/imagens/fotos/trail.jpg",
       descricao:
         "Primeira edição. Trilha técnica, 780 m de ganho de elevação e dois pontos de hidratação. Recomendada para quem já correu 10 km em terreno irregular.",
       publicado: true,
@@ -140,7 +140,7 @@ export const SEED: Dados = {
       distancias: ["5 km", "10 km"],
       preco: 79,
       vagas: 1000,
-      imagem: "/imagens/noturna.svg",
+      imagem: "/imagens/fotos/noturna.jpg",
       descricao: "Edição de 2025, com 968 corredores na linha de chegada.",
       publicado: true,
     },
@@ -157,7 +157,7 @@ export const SEED: Dados = {
       distancias: ["5 km", "10 km", "21 km"],
       preco: 110,
       vagas: 2200,
-      imagem: "/imagens/rua.svg",
+      imagem: "/imagens/fotos/rua.jpg",
       descricao: "Recorde de público: 2.140 inscritos e 1.987 concluintes.",
       publicado: true,
     },
@@ -174,7 +174,7 @@ export const SEED: Dados = {
       distancias: ["200 m", "500 m"],
       preco: 30,
       vagas: 300,
-      imagem: "/imagens/kids.svg",
+      imagem: "/imagens/fotos/kids.jpg",
       descricao: "A primeira prova kids da organização, com 287 crianças.",
       publicado: true,
     },

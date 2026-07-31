@@ -27,12 +27,12 @@ export default function AdminEventos() {
         </Link>
       </div>
 
-      <ul className="mt-10 border-t border-linha">
+      <ul className="mt-10 space-y-3">
         {ordenados.map((evento) => (
           <li key={evento.id}>
             <Link
               href={`/admin/eventos/${evento.id}`}
-              className="grid grid-cols-[1fr_auto] items-center gap-x-6 gap-y-2 border-b border-linha bg-branco px-5 py-5 transition-colors hover:bg-verde-claro"
+              className="grid grid-cols-[1fr_auto] items-center gap-x-6 gap-y-2 rounded-xl border border-linha bg-branco px-5 py-5 transition-colors hover:bg-verde-claro"
             >
               <div className="min-w-0">
                 <p className="display text-xl">
@@ -52,10 +52,10 @@ export default function AdminEventos() {
               <span
                 className={`eyebrow px-2 py-1 ${
                   !evento.publicado
-                    ? "border border-linha text-musgo"
+                    ? "rounded-full border border-linha px-2 text-musgo"
                     : ehFuturo(evento)
                       ? "bg-verde-claro text-verde"
-                      : "border border-linha text-musgo"
+                      : "rounded-full border border-linha px-2 text-musgo"
                 }`}
               >
                 {!evento.publicado

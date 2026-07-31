@@ -20,7 +20,7 @@ export function ImagemEvento({
         src={evento.imagem}
         alt={`${evento.nome}, ${evento.edicao}ª edição`}
         loading="lazy"
-        className={`h-full w-full object-cover ${className}`}
+        className={`h-full w-full rounded-3xl object-cover ${className}`}
       />
     );
   }

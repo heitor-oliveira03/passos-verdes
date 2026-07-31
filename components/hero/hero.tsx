@@ -62,8 +62,8 @@ export function Hero() {
   if (!banner) return null;
 
   return (
-    <div ref={palcoRef}>
-      <section className="relative isolate flex min-h-[84svh] flex-col justify-end overflow-hidden bg-mata text-branco">
+    <div ref={palcoRef} className="px-3 pt-3 sm:px-5 sm:pt-5">
+      <section className="relative isolate flex min-h-[78svh] flex-col justify-end overflow-hidden rounded-3xl bg-mata text-branco sm:rounded-4xl">
         {slides.map((slide, i) =>
           slide.imagem ? (
             // eslint-disable-next-line @next/next/no-img-element -- fonte é data URL do admin, sem otimizador
@@ -78,12 +78,19 @@ export function Hero() {
             />
           ) : null,
         )}
-        {/* Véu: a foto é fundo, o texto é o assunto. */}
-        <div aria-hidden className="absolute inset-0 bg-tinta/55" />
+        {/* Dois véus: um do pé para cima, outro da esquerda — é onde o texto
+            mora. A foto continua legível na diagonal oposta. */}
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-linear-to-t from-tinta/95 via-tinta/60 to-tinta/25"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-linear-to-r from-tinta/80 via-transparent to-transparent"
+        />
 
         {total > 1 ? (
-          // Alinhadas ao topo: o título ocupa a metade de baixo da hero.
-          <div className="pointer-events-none absolute inset-y-0 left-0 right-0 z-10 flex items-start justify-between px-2 pt-[16svh] sm:px-4">
+          <div className="pointer-events-none absolute inset-y-0 left-0 right-0 z-10 flex items-center justify-between px-3 sm:px-5">
             {[
               { passo: -1, seta: "←", rotulo: "Slide anterior" },
               { passo: 1, seta: "→", rotulo: "Próximo slide" },
@@ -93,7 +100,7 @@ export function Hero() {
                 type="button"
                 onClick={() => ir(b.passo)}
                 aria-label={b.rotulo}
-                className="pointer-events-auto flex h-12 w-12 items-center justify-center border border-branco/30 bg-tinta/30 text-xl text-branco backdrop-blur-sm transition-colors hover:border-verde hover:bg-verde"
+                className="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full border border-branco/25 bg-tinta/25 text-xl text-branco backdrop-blur-md transition-all hover:scale-110 hover:border-verde hover:bg-verde"
               >
                 <span aria-hidden>{b.seta}</span>
               </button>
@@ -101,7 +108,7 @@ export function Hero() {
           </div>
         ) : null}
 
-        <div className="relative mx-auto w-full max-w-[1400px] px-5 pb-24 pt-16 sm:px-8 sm:pt-24">
+        <div className="relative mx-auto w-full max-w-350 px-6 pb-14 pt-16 sm:px-12 sm:pb-16 sm:pt-24">
           <p data-surge className="eyebrow text-verde">
             {banner.eyebrow}
           </p>
@@ -128,7 +135,7 @@ export function Hero() {
           <Link
             data-surge
             href={banner.ctaHref}
-            className="eyebrow mt-8 inline-flex items-center gap-3 bg-verde px-6 py-4 text-branco transition-colors hover:bg-branco hover:text-tinta"
+            className="eyebrow mt-8 inline-flex items-center gap-3 rounded-full bg-verde px-7 py-4 text-branco transition-all hover:scale-[1.03] hover:bg-branco hover:text-tinta"
           >
             {banner.ctaLabel}
             <span aria-hidden>→</span>
@@ -143,8 +150,10 @@ export function Hero() {
                   onClick={() => setAtual(i)}
                   aria-label={`Ver ${slide.titulo} ${slide.destaque}`}
                   aria-current={i === atual}
-                  className={`h-1 w-12 transition-colors ${
-                    i === atual ? "bg-verde" : "bg-branco/35 hover:bg-branco/70"
+                  className={`h-1.5 rounded-full transition-all duration-500 ${
+                    i === atual
+                      ? "w-14 bg-verde"
+                      : "w-8 bg-branco/35 hover:bg-branco/70"
                   }`}
                 />
               ))}
@@ -155,8 +164,8 @@ export function Hero() {
 
       {/* Fita de dados: a próxima largada, logo abaixo da hero. */}
       {proxima ? (
-        <div data-surge className="bg-branco">
-          <dl className="mx-auto flex max-w-[1400px] flex-wrap items-baseline gap-x-10 gap-y-3 border-t border-tinta/15 px-5 py-4 sm:px-8">
+        <div data-surge className="px-3 pt-3 sm:px-5 sm:pt-4">
+          <dl className="mx-auto flex max-w-350 flex-wrap items-baseline gap-x-10 gap-y-3 rounded-2xl bg-cal px-6 py-5 sm:px-8">
             <div>
               <dt className="eyebrow text-musgo">Próxima largada</dt>
               <dd className="mt-2 font-mono text-sm">

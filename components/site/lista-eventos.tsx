@@ -30,7 +30,7 @@ export function ListaEventos({
         <li key={evento.id}>
           <Link
             href={`/eventos/${evento.slug}`}
-            className="group grid grid-cols-[3.5rem_1fr] items-baseline gap-x-5 gap-y-2 border-t border-linha py-7 transition-colors hover:bg-cal sm:grid-cols-[4rem_1fr_13rem_10rem_1.5rem] sm:gap-x-8"
+            className="group grid grid-cols-[3.5rem_1fr] items-baseline gap-x-5 gap-y-2 border-t border-linha px-4 py-7 transition-colors hover:rounded-2xl hover:bg-cal sm:grid-cols-[4rem_1fr_13rem_10rem_1.5rem] sm:gap-x-8"
           >
             <span className="eyebrow self-start pt-1 text-verde tabular-nums">
               {String(evento.edicao).padStart(2, "0")}

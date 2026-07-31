@@ -17,7 +17,7 @@ export function Marca({ className = "" }: { className?: string }) {
 export function Cabecalho() {
   return (
     <header className="sticky top-0 z-50 border-b border-linha bg-branco/85 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-5 sm:px-8">
+      <div className="mx-auto flex h-16 max-w-350 items-center justify-between px-5 sm:px-8">
         <Link href="/" aria-label="Passos Verdes, página inicial">
           <Marca />
         </Link>
@@ -34,7 +34,7 @@ export function Cabecalho() {
           ))}
           <Link
             href="/eventos"
-            className="eyebrow bg-tinta px-4 py-2.5 text-branco transition-colors hover:bg-verde"
+            className="eyebrow rounded-full bg-tinta px-5 py-2.5 text-branco transition-all hover:scale-[1.04] hover:bg-verde"
           >
             Inscreva-se
           </Link>
@@ -46,7 +46,7 @@ export function Cabecalho() {
             <span className="abrir">Menu</span>
             <span className="fechar hidden">Fechar</span>
           </summary>
-          <div className="fixed inset-x-0 top-16 border-b border-linha bg-branco px-5 pb-8 pt-2">
+          <div className="fixed inset-x-0 top-16 rounded-b-3xl border-b border-linha bg-branco px-5 pb-8 pt-2 shadow-lg">
             {LINKS.map((link) => (
               <Link
                 key={link.href}

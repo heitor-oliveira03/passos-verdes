@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 /** Classe única para input, select e textarea do site e do admin. */
 export const entrada =
-  "w-full border border-linha bg-branco px-4 py-3 text-base text-tinta transition-colors placeholder:text-musgo/60 focus:border-verde focus:outline-none";
+  "w-full rounded-xl border border-linha bg-branco px-4 py-3 text-base text-tinta shadow-sm transition-all duration-200 placeholder:text-musgo/60 hover:border-musgo/50 focus:border-verde focus:shadow-[0_0_0_4px_var(--color-verde-claro)] focus:outline-none";
 
 export function Campo({
   label,
