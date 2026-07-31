@@ -49,10 +49,21 @@ function BotaoTema({ escuro }: { escuro: boolean }) {
         localStorage.setItem(CHAVE_TEMA, escuro ? "claro" : "escuro");
         ouvintesDoTema.forEach((ouvir) => ouvir());
       }}
-      aria-pressed={escuro}
-      className="eyebrow rounded-full border border-linha px-3 py-1.5 text-musgo transition-colors hover:border-verde hover:text-verde"
+      role="switch"
+      aria-checked={escuro}
+      aria-label="Tema escuro"
+      title={escuro ? "Mudar para o tema claro" : "Mudar para o tema escuro"}
+      className="relative flex h-8 w-14 shrink-0 items-center rounded-full border border-linha bg-cal transition-colors hover:border-verde"
     >
-      {escuro ? "Claro" : "Escuro"}
+      {/* Botão físico: o disco corre para o lado do tema ligado. */}
+      <span
+        aria-hidden
+        className={`flex h-6 w-6 items-center justify-center rounded-full bg-verde text-xs transition-transform duration-300 ${
+          escuro ? "translate-x-7" : "translate-x-1"
+        }`}
+      >
+        {escuro ? "☾" : "☀"}
+      </span>
     </button>
   );
 }

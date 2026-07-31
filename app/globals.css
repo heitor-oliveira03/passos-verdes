@@ -21,12 +21,18 @@
  * border-linha…) segue junto sem nenhuma alteração de markup.
  */
 .tema-escuro {
-  --color-branco: #0f1512;
-  --color-cal: #080c0a;
-  --color-tinta: #eaf1ec;
-  --color-musgo: #90a396;
-  --color-linha: #26312b;
-  --color-verde-claro: #10331f;
+  --color-branco: #141b17; /* superfície: cartão, cabeçalho, campo */
+  --color-cal: #0a0f0c; /* fundo da página */
+  --color-tinta: #edf3ee; /* texto e botões sólidos */
+  --color-musgo: #9bb0a2; /* texto secundário */
+  --color-linha: #2a3831;
+  --color-verde: #19c169; /* mais claro: o verde do claro apaga no escuro */
+  --color-verde-claro: #143a25;
+
+  /* `color` herda valor já calculado: sem redeclarar aqui, todo texto sem
+     classe de cor continuaria com o tinta do tema claro (preto no preto). */
+  color: var(--color-tinta);
+  background-color: var(--color-cal);
   color-scheme: dark;
 }
 
