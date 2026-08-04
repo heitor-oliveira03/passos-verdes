@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Campo, entrada, selecao } from "@/components/ui/campo";
+import { EntradaFormatada } from "@/components/ui/entrada-formatada";
 import { inscrever } from "@/lib/store";
 import type { Camiseta, Evento } from "@/lib/types";
 import { preco } from "@/lib/utils";
@@ -39,6 +40,7 @@ export function FormularioInscricao({ evento }: { evento: Evento }) {
       eventoId: evento.id,
       nome,
       email: String(dadosDoForm.get("email") ?? "").trim(),
+      cpf: String(dadosDoForm.get("cpf") ?? "").trim(),
       telefone: String(dadosDoForm.get("telefone") ?? "").trim(),
       nascimento: String(dadosDoForm.get("nascimento") ?? ""),
       sexo: dadosDoForm.get("sexo") as "F" | "M" | "Outro",
@@ -56,22 +58,30 @@ export function FormularioInscricao({ evento }: { evento: Evento }) {
       </Campo>
 
       <Campo label="E-mail">
-        <input
+        <EntradaFormatada
+          formato="email"
           name="email"
-          type="email"
           required
-          autoComplete="email"
           className={entrada}
         />
       </Campo>
 
       <Campo label="Telefone">
-        <input
+        <EntradaFormatada
+          formato="telefone"
           name="telefone"
-          type="tel"
           required
-          autoComplete="tel"
-          placeholder="15 99999-0000"
+          placeholder="(15) 99999-0000"
+          className={entrada}
+        />
+      </Campo>
+
+      <Campo label="CPF">
+        <EntradaFormatada
+          formato="cpf"
+          name="cpf"
+          required
+          placeholder="000.000.000-00"
           className={entrada}
         />
       </Campo>

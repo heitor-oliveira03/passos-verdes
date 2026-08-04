@@ -1,6 +1,7 @@
 "use client";
 
 import { Campo, entrada } from "@/components/ui/campo";
+import { EntradaFormatada } from "@/components/ui/entrada-formatada";
 import { CONTATO } from "@/lib/seed";
 
 const ASSUNTOS = [
@@ -33,11 +34,10 @@ export function FormularioContato() {
       </Campo>
 
       <Campo label="E-mail">
-        <input
+        <EntradaFormatada
+          formato="email"
           name="email"
-          type="email"
           required
-          autoComplete="email"
           className={entrada}
         />
       </Campo>

@@ -81,7 +81,7 @@ export default function LayoutDoAdmin({
 
   return (
     <div
-      className={`flex min-h-full flex-col bg-cal ${escuro ? "tema-escuro" : ""}`}
+      className={`flex min-h-dvh flex-col bg-cal ${escuro ? "tema-escuro" : ""}`}
     >
       <header className="border-b border-linha bg-branco">
         <div className="mx-auto flex h-16 max-w-300 items-center gap-8 px-5 sm:px-8">
@@ -139,7 +139,7 @@ function Login({ escuro }: { escuro: boolean }) {
 
   return (
     <div
-      className={`flex min-h-full items-center justify-center bg-cal px-5 py-20 ${escuro ? "tema-escuro" : ""}`}
+      className={`flex min-h-dvh items-center justify-center bg-cal px-5 py-20 ${escuro ? "tema-escuro" : ""}`}
     >
       <div className="w-full max-w-sm">
         <Marca />

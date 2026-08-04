@@ -52,6 +52,7 @@ export function idade(nascimento: string, referencia: string) {
 const COLUNAS = [
   "Nome",
   "E-mail",
+  "CPF",
   "Telefone",
   "Nascimento",
   "Idade na prova",
@@ -74,6 +75,7 @@ export function planilhaCsv(evento: Evento, inscricoes: Inscricao[]) {
     [
       i.nome,
       i.email,
+      i.cpf ?? "",
       i.telefone,
       i.nascimento,
       idade(i.nascimento, evento.data),

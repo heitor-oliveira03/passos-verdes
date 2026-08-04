@@ -46,6 +46,8 @@ export type Inscricao = {
   eventoId: string;
   nome: string;
   email: string;
+  /** Opcional para manter compatibilidade com inscrições salvas antes do campo. */
+  cpf?: string;
   telefone: string;
   nascimento: string;
   sexo: "F" | "M" | "Outro";

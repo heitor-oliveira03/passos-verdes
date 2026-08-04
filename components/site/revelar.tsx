@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, type ReactNode } from "react";
 
 type Props = {
@@ -22,6 +23,7 @@ type Props = {
  */
 export function Revelar({ children, seletor, className }: Props) {
   const ref = useRef<HTMLDivElement>(null);
+  const caminho = usePathname();
 
   useEffect(() => {
     const elemento = ref.current;
@@ -50,6 +52,18 @@ export function Revelar({ children, seletor, className }: Props) {
       observador.observe(alvo);
     });
 
+    // Na navegação pelo Link, o novo conteúdo pode já nascer dentro da área
+    // visível antes da primeira notificação do observer.
+    requestAnimationFrame(() => {
+      alvos.forEach((alvo) => {
+        const caixa = alvo.getBoundingClientRect();
+        if (caixa.top < innerHeight && caixa.bottom > 0) {
+          alvo.dataset.revelar = "visivel";
+          observador.unobserve(alvo);
+        }
+      });
+    });
+
     return () => {
       observador.disconnect();
       alvos.forEach((alvo) => {
@@ -57,7 +71,7 @@ export function Revelar({ children, seletor, className }: Props) {
         alvo.style.transitionDelay = "";
       });
     };
-  }, [seletor]);
+  }, [caminho, seletor]);
 
   return (
     <div ref={ref} className={className}>

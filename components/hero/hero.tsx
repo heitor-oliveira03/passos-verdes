@@ -37,8 +37,12 @@ export function Hero() {
     if (!palco) return;
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
+    let cancelado = false;
     let matar: (() => void) | undefined;
     import("gsap").then(({ gsap }) => {
+      // A importação é assíncrona: a rota pode ter desmontado enquanto o
+      // pacote carregava. Nesse caso, não aplica estilos ao DOM antigo.
+      if (cancelado || !palco.isConnected) return;
       const ctx = gsap.context(() => {
         gsap
           .timeline({ defaults: { ease: "power3.out" } })
@@ -56,7 +60,10 @@ export function Hero() {
       matar = () => ctx.revert();
     });
 
-    return () => matar?.();
+    return () => {
+      cancelado = true;
+      matar?.();
+    };
   }, []);
 
   const banner = slides[atual] ?? slides[0];

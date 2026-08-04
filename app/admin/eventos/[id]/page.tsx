@@ -343,6 +343,7 @@ export default function EditarEvento() {
                     <td className="px-4 py-3">{p.nome}</td>
                     <td className="px-4 py-3 font-mono text-xs text-musgo">
                       {p.email}
+                      {p.cpf ? ` · ${p.cpf}` : ""}
                       <br />
                       {p.telefone}
                     </td>
