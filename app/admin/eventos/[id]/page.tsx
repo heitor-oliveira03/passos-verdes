@@ -5,6 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { ImagemEvento } from "@/components/site/imagem-evento";
 import { arquivo, botao, Campo, entrada, selecao } from "@/components/ui/campo";
+import { ModalConfirmacao } from "@/components/ui/modal-confirmacao";
 import {
   eventoVazio,
   removerEvento,
@@ -12,7 +13,12 @@ import {
   salvarEvento,
   useDados,
 } from "@/lib/store";
-import { MODALIDADES, type Evento, type Modalidade } from "@/lib/types";
+import {
+  MODALIDADES,
+  type Evento,
+  type Inscricao,
+  type Modalidade,
+} from "@/lib/types";
 import {
   baixarPlanilha,
   dataLonga,
@@ -32,6 +38,9 @@ export default function EditarEvento() {
   // A imagem salva vem do store; o estado só existe enquanto ela é trocada.
   const [imagemNova, setImagem] = useState<string | null>(null);
   const [erroImagem, setErroImagem] = useState("");
+  const [confirmandoExclusao, setConfirmandoExclusao] = useState(false);
+  const [inscricaoParaRemover, setInscricaoParaRemover] =
+    useState<Inscricao | null>(null);
   const imagem = imagemNova ?? evento?.imagem ?? "";
 
   if (!evento) {
@@ -257,7 +266,7 @@ export default function EditarEvento() {
           </div>
         </div>
 
-        <label className="flex items-center gap-3 sm:col-span-2">
+        <label className="flex min-h-11 items-center gap-3 sm:col-span-2">
           <input
             type="checkbox"
             name="publicado"
@@ -277,16 +286,7 @@ export default function EditarEvento() {
           {id === "novo" ? null : (
             <button
               type="button"
-              onClick={() => {
-                if (
-                  confirm(
-                    `Excluir "${evento.nome}" e as ${participantes.length} inscrições?`,
-                  )
-                ) {
-                  removerEvento(evento.id);
-                  router.replace("/admin/eventos");
-                }
-              }}
+              onClick={() => setConfirmandoExclusao(true)}
               className="eyebrow text-musgo underline underline-offset-4 hover:text-tinta"
             >
               Excluir evento
@@ -360,10 +360,7 @@ export default function EditarEvento() {
                     <td className="px-4 py-3 text-right">
                       <button
                         type="button"
-                        onClick={() => {
-                          if (confirm(`Remover a inscrição de ${p.nome}?`))
-                            removerInscricao(p.id);
-                        }}
+                        onClick={() => setInscricaoParaRemover(p)}
                         className="eyebrow text-musgo underline underline-offset-4 hover:text-tinta"
                       >
                         Remover
@@ -384,6 +381,29 @@ export default function EditarEvento() {
           </div>
         </section>
       )}
+
+      <ModalConfirmacao
+        aberto={confirmandoExclusao}
+        titulo="Excluir evento?"
+        descricao={`“${evento.nome}” e suas ${participantes.length} inscrições serão removidos permanentemente.`}
+        rotuloConfirmar="Excluir evento"
+        aoConfirmar={() => {
+          removerEvento(evento.id);
+          router.replace("/admin/eventos");
+        }}
+        aoFechar={() => setConfirmandoExclusao(false)}
+      />
+
+      <ModalConfirmacao
+        aberto={inscricaoParaRemover !== null}
+        titulo="Remover inscrição?"
+        descricao={`A inscrição de ${inscricaoParaRemover?.nome ?? ""} será removida deste evento.`}
+        rotuloConfirmar="Remover inscrição"
+        aoConfirmar={() => {
+          if (inscricaoParaRemover) removerInscricao(inscricaoParaRemover.id);
+        }}
+        aoFechar={() => setInscricaoParaRemover(null)}
+      />
     </>
   );
 }

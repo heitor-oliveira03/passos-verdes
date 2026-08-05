@@ -12,7 +12,7 @@ export default function AdminEventos() {
 
   return (
     <>
-      <div className="flex items-end justify-between gap-6">
+      <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <h1 className="display text-4xl">Eventos</h1>
           <p className="mt-3 max-w-lg text-musgo">

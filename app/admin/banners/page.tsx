@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { arquivo, botao, Campo, entrada, etiqueta } from "@/components/ui/campo";
+import { ModalConfirmacao } from "@/components/ui/modal-confirmacao";
 import {
   bannerVazio,
   removerBanner,
@@ -14,10 +15,11 @@ import { lerImagem } from "@/lib/utils";
 export default function AdminBanners() {
   const { banners } = useDados();
   const [emEdicao, setEmEdicao] = useState<Banner | null>(null);
+  const [paraExcluir, setParaExcluir] = useState<Banner | null>(null);
 
   return (
     <>
-      <div className="flex items-end justify-between gap-6">
+      <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <h1 className="display text-4xl">Banners da hero</h1>
           <p className="mt-3 max-w-lg text-musgo">
@@ -78,10 +80,7 @@ export default function AdminBanners() {
             </button>
             <button
               type="button"
-              onClick={() => {
-                if (confirm(`Excluir o banner "${banner.titulo}"?`))
-                  removerBanner(banner.id);
-              }}
+              onClick={() => setParaExcluir(banner)}
               className="eyebrow text-musgo underline underline-offset-4 hover:text-tinta"
             >
               Excluir
@@ -92,10 +91,22 @@ export default function AdminBanners() {
 
       {emEdicao ? (
         <FormularioBanner
+          key={emEdicao.id}
           banner={emEdicao}
           aoFechar={() => setEmEdicao(null)}
         />
       ) : null}
+
+      <ModalConfirmacao
+        aberto={paraExcluir !== null}
+        titulo="Excluir banner?"
+        descricao={`O banner “${paraExcluir?.titulo ?? ""}” será removido permanentemente.`}
+        rotuloConfirmar="Excluir banner"
+        aoConfirmar={() => {
+          if (paraExcluir) removerBanner(paraExcluir.id);
+        }}
+        aoFechar={() => setParaExcluir(null)}
+      />
     </>
   );
 }
@@ -140,9 +151,20 @@ function FormularioBanner({
       action={aoEnviar}
       className="mt-12 grid gap-5 rounded-2xl border border-linha bg-branco p-6 shadow-sm sm:grid-cols-2 sm:p-8"
     >
-      <h2 className="display text-2xl sm:col-span-2">
-        {banner.titulo ? "Editar banner" : "Novo banner"}
-      </h2>
+      <div className="flex items-center justify-between gap-4 sm:col-span-2">
+        <h2 className="display text-2xl">
+          {banner.titulo ? "Editar banner" : "Novo banner"}
+        </h2>
+        <button
+          type="button"
+          onClick={aoFechar}
+          aria-label="Fechar formulário do banner"
+          title="Fechar"
+          className="inline-flex size-10 shrink-0 items-center justify-center rounded-full border border-linha bg-cal text-2xl leading-none text-musgo transition-colors hover:border-verde hover:bg-verde-claro hover:text-tinta"
+        >
+          <span aria-hidden>×</span>
+        </button>
+      </div>
 
       <div className="sm:col-span-2">
         <span className="eyebrow text-musgo">Foto do slide</span>
@@ -241,7 +263,7 @@ function FormularioBanner({
         />
       </Campo>
 
-      <label className="flex items-center gap-3 sm:col-span-2">
+      <label className="flex min-h-11 items-center gap-3 sm:col-span-2">
         <input
           type="checkbox"
           name="ativo"
@@ -251,7 +273,7 @@ function FormularioBanner({
         <span className="text-sm">Incluir este banner no carrossel da home</span>
       </label>
 
-      <div className="flex gap-4 sm:col-span-2">
+      <div className="flex flex-wrap items-center gap-4 sm:col-span-2">
         <button
           type="submit"
           className={botao}

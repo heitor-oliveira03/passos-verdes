@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { Campo, entrada, selecao } from "@/components/ui/campo";
+import { Campo, entrada } from "@/components/ui/campo";
+import { CampoData } from "@/components/ui/campo-data";
 import { EntradaFormatada } from "@/components/ui/entrada-formatada";
+import { Seletor } from "@/components/ui/seletor";
 import { inscrever } from "@/lib/store";
 import type { Camiseta, Evento } from "@/lib/types";
 import { preco } from "@/lib/utils";
@@ -87,40 +89,41 @@ export function FormularioInscricao({ evento }: { evento: Evento }) {
       </Campo>
 
       <Campo label="Data de nascimento">
-        <input name="nascimento" type="date" required className={entrada} />
+        <CampoData name="nascimento" />
       </Campo>
 
       <Campo label="Sexo">
-        <select name="sexo" required defaultValue="F" className={selecao}>
-          <option value="F">Feminino</option>
-          <option value="M">Masculino</option>
-          <option value="Outro">Outro</option>
-        </select>
+        <Seletor
+          name="sexo"
+          valorInicial="F"
+          opcoes={[
+            { valor: "F", rotulo: "Feminino" },
+            { valor: "M", rotulo: "Masculino" },
+            { valor: "Outro", rotulo: "Outro" },
+          ]}
+        />
       </Campo>
 
       <Campo label="Distância">
-        <select
+        <Seletor
           name="distancia"
-          required
-          defaultValue={evento.distancias[0]}
-          className={selecao}
-        >
-          {evento.distancias.map((d) => (
-            <option key={d} value={d}>
-              {d}
-            </option>
-          ))}
-        </select>
+          valorInicial={evento.distancias[0]}
+          opcoes={evento.distancias.map((distancia) => ({
+            valor: distancia,
+            rotulo: distancia,
+          }))}
+        />
       </Campo>
 
       <Campo label="Camiseta">
-        <select name="camiseta" required defaultValue="M" className={selecao}>
-          {CAMISETAS.map((c) => (
-            <option key={c} value={c}>
-              {c}
-            </option>
-          ))}
-        </select>
+        <Seletor
+          name="camiseta"
+          valorInicial="M"
+          opcoes={CAMISETAS.map((camiseta) => ({
+            valor: camiseta,
+            rotulo: camiseta,
+          }))}
+        />
       </Campo>
 
       <Campo label="Equipe" dica="Opcional" className="sm:col-span-2">
