@@ -78,7 +78,6 @@ export function CampoData({ name }: { name: string }) {
           placeholder="dd/mm/aaaa"
           value={texto}
           aria-controls={calendarioId}
-          aria-expanded={aberto}
           onChange={(evento) => setTexto(formatarDigitacao(evento.target.value))}
           onFocus={() => setAberto(true)}
           className="block min-h-12 w-full rounded-xl border border-linha bg-branco py-3 pl-4 pr-12 text-base leading-6 text-tinta shadow-sm transition-all placeholder:text-musgo/60 hover:border-musgo/50 focus:border-verde focus:shadow-[0_0_0_4px_var(--color-verde-claro)] focus:outline-none"
