@@ -58,7 +58,7 @@ function BotaoTema({ escuro }: { escuro: boolean }) {
       {/* Botão físico: o disco corre para o lado do tema ligado. */}
       <span
         aria-hidden
-        className={`flex h-6 w-6 items-center justify-center rounded-full bg-verde text-xs transition-transform duration-300 ${
+        className={`flex size-6 items-center justify-center rounded-full bg-verde text-xs transition-transform duration-300 ${
           escuro ? "translate-x-7" : "translate-x-1"
         }`}
       >

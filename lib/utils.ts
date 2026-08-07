@@ -16,6 +16,12 @@ const diaCurto = new Intl.DateTimeFormat("pt-BR", {
   timeZone: "UTC",
 });
 
+const mesAno = new Intl.DateTimeFormat("pt-BR", {
+  month: "long",
+  year: "numeric",
+  timeZone: "UTC",
+});
+
 const moeda = new Intl.NumberFormat("pt-BR", {
   style: "currency",
   currency: "BRL",
@@ -26,12 +32,44 @@ export const dataCurta = (iso: string) =>
   diaCurto.format(new Date(iso)).replace(".", "");
 export const ano = (iso: string) => iso.slice(0, 4);
 export const preco = (valor: number) => moeda.format(valor);
+/** "2026-09" → "setembro de 2026". */
+export const mesLongo = (mes: string) => mesAno.format(new Date(`${mes}-01`));
 
 export const ehFuturo = (evento: Evento) => evento.data >= hoje();
 
 /** Data de hoje em ISO curto, para comparar com `Evento.data` sem fuso. */
 export function hoje() {
   return new Date().toISOString().slice(0, 10);
+}
+
+/** Anda `passos` meses a partir de um "AAAA-MM" e devolve outro "AAAA-MM". */
+export function mesVizinho(mes: string, passos: number) {
+  const [a, m] = mes.split("-").map(Number);
+  return new Date(Date.UTC(a, m - 1 + passos, 1)).toISOString().slice(0, 7);
+}
+
+/**
+ * Semanas de um mês para a grade do calendário: cada linha tem 7 posições,
+ * de domingo a sábado, com a data ISO do dia ou `null` no vazio das pontas.
+ */
+export function semanasDoMes(mes: string) {
+  const [a, m] = mes.split("-").map(Number);
+  const vazioInicial = new Date(Date.UTC(a, m - 1, 1)).getUTCDay();
+  const dias = new Date(Date.UTC(a, m, 0)).getUTCDate();
+
+  const celulas: Array<string | null> = Array.from(
+    { length: Math.ceil((vazioInicial + dias) / 7) * 7 },
+    (_, i) => {
+      const dia = i - vazioInicial + 1;
+      return dia < 1 || dia > dias
+        ? null
+        : `${mes}-${String(dia).padStart(2, "0")}`;
+    },
+  );
+
+  return Array.from({ length: celulas.length / 7 }, (_, i) =>
+    celulas.slice(i * 7, i * 7 + 7),
+  );
 }
 
 export function slugify(texto: string) {

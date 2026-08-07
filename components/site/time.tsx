@@ -61,7 +61,7 @@ export function Time() {
             alt={pessoa.nome}
             width={128}
             height={128}
-            className="h-36 w-36 rounded-full object-cover ring-4 ring-verde/25 sm:h-44 sm:w-44"
+            className="size-36 rounded-full object-cover ring-4 ring-verde/25 sm:h-44 sm:w-44"
           />
 
           <div>

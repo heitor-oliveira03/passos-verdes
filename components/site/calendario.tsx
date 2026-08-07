@@ -1,5 +1,6 @@
 "use client";
 
+import { GradeMensal } from "./grade-mensal";
 import { ListaEventos } from "./lista-eventos";
 import { Revelar } from "./revelar";
 import { useDados } from "@/lib/store";
@@ -18,6 +19,8 @@ export function Calendario() {
 
   return (
     <>
+      <GradeMensal />
+
       <section id="proximos" className="mx-auto max-w-350 px-5 pb-24 sm:px-8">
         <p className="eyebrow text-verde">
           Próximos eventos · {proximos.length}
