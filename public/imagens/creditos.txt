@@ -1,13 +1,11 @@
 Créditos das fotos (Wikimedia Commons)
 
-fotos/noturna.jpg   — "Night Run", Phil Roeder — CC BY 2.0
-fotos/rua.jpg       — "Corrida de rua no Túnel Rei Pelé", Agência Brasília — CC BY 2.0
-fotos/largada.jpg   — "Largada da 14ª Corrida Aniversário de Porto Alegre",
-                      Brayan Martins / PMPA — CC BY (Attribution)
 fotos/corredora.jpg — "14ª Corrida Aniversário de Porto Alegre",
                       Brayan Martins / PMPA — CC BY (Attribution)
-fotos/kids.jpg      — "Fun Run Fundraiser", Jarek Tuszyński — CC BY-SA 3.0
-fotos/trail.jpg     — "Mountain running", bugflickr — CC BY-SA 2.0
+
+logo.png            — logotipo da Passos Verdes.
+fotos/obrigado.jpg  — foto de agradecimento da Passos Verdes.
+eventos/*.jpg       — artes de divulgação das provas (Passos Verdes).
 
 time/*.jpg          — retratos de exemplo (randomuser.me). Substituir pelas
                       fotos reais da equipe antes de ir para produção.

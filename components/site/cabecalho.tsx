@@ -8,8 +8,18 @@ const LINKS = [
 
 export function Marca({ className = "" }: { className?: string }) {
   return (
-    <span className={`display text-lg leading-none ${className}`}>
-      Passos<span className="text-verde">Verdes</span>
+    <span
+      className={`display flex items-center gap-2.5 text-lg leading-none ${className}`}
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element -- arquivo local, mesmo caminho das outras */}
+      <img
+        src="/imagens/logo.png"
+        alt=""
+        className="size-9 shrink-0 object-contain"
+      />
+      <span>
+        Passos<span className="text-verde">Verdes</span>
+      </span>
     </span>
   );
 }

@@ -9,7 +9,7 @@ import { CIDADE } from "@/lib/seed";
 
 const NUMEROS = [
   { valor: "2025", rotulo: "Primeira largada" },
-  { valor: "11,4 mil", rotulo: "Corredores inscritos" },
+  { valor: "2,5 mil", rotulo: "Corredores inscritos" },
   { valor: "4", rotulo: "Provas por temporada" },
 ];
 
@@ -27,7 +27,7 @@ const MODALIDADES_HOME = [
   {
     nome: "Longão",
     texto:
-      "De 5 km a 21 km no asfalto, mais uma prova de montanha por temporada. Cronometragem por chip nas duas.",
+      "De 5 km a 10 km no asfalto, com cronometragem por chip, pórtico de chegada e festa depois da linha.",
   },
 ];
 
@@ -98,9 +98,24 @@ export default function Home() {
 
       <Parceiros />
 
+      <section className="mx-auto max-w-350 px-5 pb-6 pt-24 sm:px-8">
+        <Revelar>
+          <p className="eyebrow text-verde">Depois da linha de chegada</p>
+          <h2 className="display mt-6 max-w-3xl text-5xl sm:text-7xl">
+            Nosso muito obrigado
+          </h2>
+          <p className="mt-8 max-w-xl text-lg text-musgo">
+            Cada largada é feita por quem corre, por quem apoia na beira do
+            percurso e por quem acorda cedo para montar tudo. Obrigado por
+            fazerem a Passos Verdes acontecer.
+          </p>
+        </Revelar>
+      </section>
+
       <Faixa
-        src="/imagens/fotos/largada.jpg"
-        alt="Pelotão largando na avenida ao amanhecer, com a cidade ao fundo"
+        src="/imagens/fotos/obrigado.jpg"
+        alt="Turma da Passos Verdes reunida com medalhas e a bandeira do time depois da prova"
+        className="object-bottom"
       />
 
       <section className="mx-auto max-w-350 px-5 py-28 sm:px-8">

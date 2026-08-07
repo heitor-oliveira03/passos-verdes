@@ -8,9 +8,18 @@ export function Rodape() {
         {/* ponytail: cqw em vez de vw — o container trava em 1400px e o vw não,
             por isso a palavra vazava. 9.5 = largura de "PassosVerdes" no Archivo
             wdth 125; reajustar se a fonte mudar. */}
-        <p className="display text-[9.5cqw] leading-[0.8]">
-          Passos<span className="text-verde">Verdes</span>
-        </p>
+        <div className="flex items-start justify-between gap-6">
+          <p className="display text-[9.5cqw] leading-[0.8]">
+            Passos<span className="text-verde">Verdes</span>
+          </p>
+          {/* eslint-disable-next-line @next/next/no-img-element -- arquivo local, mesmo caminho das outras */}
+          <img
+            src="/imagens/logo.png"
+            alt="Logotipo da Passos Verdes"
+            loading="lazy"
+            className="size-16 shrink-0 object-contain sm:size-24"
+          />
+        </div>
 
         <div className="mt-14 grid gap-10 border-t border-white/15 pt-10 sm:grid-cols-3">
           <div>

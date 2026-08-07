@@ -7,34 +7,34 @@ import { CIDADE } from "@/lib/seed";
 export const metadata: Metadata = {
   title: "Sobre nós",
   description:
-    "A Passos Verdes organiza corridas de rua, noturnas e provas kids desde 2019. Conheça como montamos cada largada.",
+    "A Passos Verdes organiza corridas de rua, noturnas e provas kids desde 2025. Conheça como montamos cada largada.",
 };
 
 /** A cronologia é uma sequência de verdade — por isso ela é numerada por ano. */
 const LINHA_DO_TEMPO = [
   {
     ano: "2025",
-    titulo: "A primeira corrida de Santo Aleixo",
+    titulo: "A primeira Corrida de Santo Aleixo",
     texto:
-      "2,5k de corredores, 7 km, um percurso com subidas, descidas e grandes retas. A largada é na praça de Andorinhas e a linha de chegada é na praça da Capela.",
+      "2,5 mil corredores, 7 km, um percurso com subidas, descidas e grandes retas. Largada na praça de Andorinhas e chegada na praça da Capela.",
   },
   {
-    ano: "2021",
-    titulo: "Cronometragem por chip",
-    texto:
-      "Primeira prova com tempo oficial. Passamos a publicar o resultado completo no mesmo dia, incluindo quem terminou por último.",
-  },
-  {
-    ano: "2023",
+    ano: "2025",
     titulo: "Nasce a Kids",
     texto:
-      "Baterias por faixa etária no fim de semana da noturna. 287 crianças na primeira edição, todas com medalha.",
+      "Baterias por faixa etária no fim de semana da prova principal. Todas as crianças com medalha na primeira edição.",
+  },
+  {
+    ano: "abr 2026",
+    titulo: "Um ano de Passos Verdes",
+    texto:
+      "A Corrida Passos Verdes fechou o primeiro ano do projeto com a turma inteira na linha de chegada.",
   },
   {
     ano: "2026",
-    titulo: "Quatro provas por temporada",
+    titulo: "Quatro provas na temporada",
     texto:
-      "Noturna, Kids, Circuito Verde e a estreia do Trail da Serra. O calendário fechado com um ano de antecedência.",
+      "Corrida Passos Verdes, Santo Aleixo, Kids Minecraft e Garytos. O calendário do ano fechado de ponta a ponta.",
   },
 ];
 
@@ -62,7 +62,7 @@ export default function Sobre() {
       <section className="@container mx-auto max-w-350 px-5 pb-20 pt-20 sm:px-8 sm:pt-28">
         <p className="eyebrow text-verde">Sobre nós</p>
         <h1 className="display mt-6 max-w-5xl text-[12cqw] leading-[0.84] sm:text-[8rem]">
-          Sete anos{" "}
+          Um ano{" "}
           {/* No celular a linha quebra sozinha: forçar o corte estoura a tela. */}
           <br className="hidden sm:inline" />
           montando largada
@@ -81,7 +81,7 @@ export default function Sobre() {
             <ol>
               {LINHA_DO_TEMPO.map((item) => (
                 <li
-                  key={item.ano}
+                  key={item.titulo}
                   className="grid gap-x-8 gap-y-3 border-t border-linha py-8 sm:grid-cols-[6rem_1fr_1fr]"
                 >
                   <span className="eyebrow pt-1 text-verde">{item.ano}</span>
