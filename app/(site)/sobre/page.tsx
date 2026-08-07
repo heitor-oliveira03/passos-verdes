@@ -7,11 +7,17 @@ import { CIDADE } from "@/lib/seed";
 export const metadata: Metadata = {
   title: "Sobre nós",
   description:
-    "A Passos Verdes organiza corridas de rua, noturnas e provas kids desde 2025. Conheça como montamos cada largada.",
+    "A Passos Verdes nasceu em março de 2025, em Santo Aleixo, da paixão pela corrida e da vontade de criar comunidade. Treinos em grupo, corridas de rua e provas kids.",
 };
 
 /** A cronologia é uma sequência de verdade — por isso ela é numerada por ano. */
 const LINHA_DO_TEMPO = [
+  {
+    ano: "mar 2025",
+    titulo: "O projeto nasce",
+    texto:
+      "Da paixão pela corrida e da vontade de criar uma comunidade vibrante em Santo Aleixo. Primeiro os treinos em grupo, abertos a todo mundo — do iniciante ao corredor experiente.",
+  },
   {
     ano: "2025",
     titulo: "A primeira Corrida de Santo Aleixo",
@@ -67,11 +73,21 @@ export default function Sobre() {
           <br className="hidden sm:inline" />
           montando largada
         </h1>
-        <p className="mt-10 max-w-xl text-lg text-musgo">
-          Somos uma organização de corrida de rua de {CIDADE}. Fazemos poucas
-          provas por ano e cuidamos de cada uma como se fosse a única: percurso,
-          sinalização, hidratação, cronometragem e a fila do guarda-volumes.
-        </p>
+        <div className="mt-10 grid max-w-3xl gap-6 text-lg text-musgo sm:grid-cols-2">
+          <p>
+            A Passos Verdes nasceu da paixão pela corrida e do desejo de criar
+            uma comunidade vibrante em {CIDADE}. Para nós correr vai além do
+            exercício: é uma forma de conectar pessoas, explorar a beleza do
+            nosso Paraíso Verde e promover um estilo de vida mais saudável e
+            feliz.
+          </p>
+          <p>
+            As atividades são abertas a todos, do iniciante ao corredor
+            experiente — treinos em grupo, eventos especiais e novos percursos
+            pelas ruas e trilhas da região. Junte-se a nós e vamos transformar{" "}
+            {CIDADE} em um palco de superação, amizade e bem-estar.
+          </p>
+        </div>
       </section>
 
       <section className="px-3 sm:px-5">

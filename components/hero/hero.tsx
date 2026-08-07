@@ -84,7 +84,10 @@ export function Hero() {
               src={slide.imagem}
               alt=""
               aria-hidden
-              className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${
+              // ponytail: as artes são verticais e a hero é uma faixa larga —
+              // centralizado sobra torso e a tarja de data bate no título. 15%
+              // pega os rostos e joga a tarja para fora do corte.
+              className={`absolute inset-0 h-full w-full object-cover object-[50%_15%] transition-opacity duration-1000 ${
                 i === atual ? "opacity-100" : "opacity-0"
               }`}
             />

@@ -5,8 +5,8 @@ export const CIDADE = "Santo Aleixo";
 
 export const CONTATO = {
   email: "contato@passosverdes.com.br",
-  telefone: "+55 15 99999-0000",
-  instagram: "@passosverdes",
+  telefone: "+55 21 99804-1657",
+  instagram: "@passosverdes_",
 };
 
 /**
@@ -73,7 +73,7 @@ export const SEED: Dados = {
       distancias: ["5 km", "10 km"],
       preco: 80,
       vagas: 800,
-      imagem: "",
+      imagem: "/imagens/eventos/passos-verdes-1.jpg",
       descricao:
         "A corrida de um ano da Passos Verdes. Largada em Andorinhas, percurso pela cidade e festa na chegada com todo mundo que fez o projeto acontecer.",
       publicado: true,
