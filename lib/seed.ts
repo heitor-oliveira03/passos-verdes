@@ -73,7 +73,7 @@ export const SEED: Dados = {
       distancias: ["5 km", "10 km"],
       preco: 80,
       vagas: 800,
-      imagem: "/imagens/eventos/passos-verdes-1-ano.jpg",
+      imagem: "",
       descricao:
         "A corrida de um ano da Passos Verdes. Largada em Andorinhas, percurso pela cidade e festa na chegada com todo mundo que fez o projeto acontecer.",
       publicado: true,
