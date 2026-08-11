@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: passos_verdes
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - dados:/var/lib/postgresql/data
+
+# Volume nomeado: o banco sobrevive ao `docker compose down`.
+# Sem isso, derrubar o container apagaria tudo.
+volumes:
+  dados:

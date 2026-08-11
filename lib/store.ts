@@ -14,8 +14,6 @@ import type { Banner, Dados, Evento, Inscricao } from "./types";
 // v2: seed ganhou banner de trail e imagens. Subir a versão descarta o que
 // estava salvo no navegador — é o preço de a seed ainda ser a fonte da verdade.
 const CHAVE = "passos-verdes/dados/v3";
-const CHAVE_SESSAO = "passos-verdes/admin";
-const SENHA = "verde2026";
 
 /**
  * Migra inscrições anteriores à numeração de peito. A ordem de cadastro é a
@@ -84,6 +82,7 @@ function gravar(proximo: Dados) {
 }
 
 function subscrever(ouvir: () => void) {
+  conferirSessao();
   if (!hidratado) {
     hidratar();
     // Avisa depois da hidratação para não divergir do HTML do servidor.
@@ -211,25 +210,45 @@ export function removerInscricao(inscricaoId: string) {
 
 /* ---------- sessão do admin ---------- */
 
-export function entrar(senha: string) {
-  if (senha !== SENHA) return false;
-  sessionStorage.setItem(CHAVE_SESSAO, "1");
-  ouvintes.forEach((ouvir) => ouvir());
-  return true;
+/**
+ * Quem manda na sessão agora é a API: o token vive num cookie httpOnly, que
+ * este código não consegue ler. Aqui só guardamos a resposta do /api/sessao.
+ */
+let autenticado = false;
+let sessaoConsultada = false;
+
+function conferirSessao() {
+  if (sessaoConsultada) return;
+  sessaoConsultada = true;
+  fetch("/api/sessao")
+    .then((r) => r.json())
+    .then((resposta: { autenticado: boolean }) => {
+      autenticado = resposta.autenticado;
+      ouvintes.forEach((ouvir) => ouvir());
+    })
+    .catch(() => {
+      // API fora do ar: segue deslogado.
+    });
 }
 
-export function sair() {
-  sessionStorage.removeItem(CHAVE_SESSAO);
+export async function entrar(senha: string) {
+  const resposta = await fetch("/api/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ senha }),
+  });
+  autenticado = resposta.ok;
+  ouvintes.forEach((ouvir) => ouvir());
+  return resposta.ok;
+}
+
+export async function sair() {
+  await fetch("/api/logout", { method: "POST" });
+  autenticado = false;
   ouvintes.forEach((ouvir) => ouvir());
 }
 
-function lerSessao() {
-  try {
-    return sessionStorage.getItem(CHAVE_SESSAO) === "1";
-  } catch {
-    return false;
-  }
-}
+const lerSessao = () => autenticado;
 
 export function useAutenticado(): boolean {
   return useSyncExternalStore(subscrever, lerSessao, () => false);

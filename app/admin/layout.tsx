@@ -133,8 +133,8 @@ export default function LayoutDoAdmin({
 function Login({ escuro }: { escuro: boolean }) {
   const [erro, setErro] = useState(false);
 
-  function aoEnviar(dados: FormData) {
-    setErro(!entrar(String(dados.get("senha") ?? "")));
+  async function aoEnviar(dados: FormData) {
+    setErro(!(await entrar(String(dados.get("senha") ?? ""))));
   }
 
   return (
@@ -178,7 +178,6 @@ function Login({ escuro }: { escuro: boolean }) {
         </form>
 
         {/* ponytail: sem backend, a senha é fixa. Trocar por auth de verdade. */}
-        <p className="mt-6 font-mono text-xs text-musgo">senha: verde2026</p>
       </div>
     </div>
   );

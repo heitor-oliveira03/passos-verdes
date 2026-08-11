@@ -1,0 +1,13 @@
+{
+  "name": "passos-verdes-api",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch --env-file=../.env index.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "express": "^5",
+    "pg": "^8"
+  }
+}
