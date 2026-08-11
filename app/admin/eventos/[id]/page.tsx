@@ -4,8 +4,10 @@ import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { ImagemEvento } from "@/components/site/imagem-evento";
-import { arquivo, botao, Campo, entrada, selecao } from "@/components/ui/campo";
+import { arquivo, botao, Campo, entrada } from "@/components/ui/campo";
+import { CampoData } from "@/components/ui/campo-data";
 import { ModalConfirmacao } from "@/components/ui/modal-confirmacao";
+import { Seletor } from "@/components/ui/seletor";
 import {
   eventoVazio,
   removerEvento,
@@ -24,6 +26,7 @@ import {
   dataLonga,
   idade,
   lerImagem,
+  numeroDePeito,
   slugify,
 } from "@/lib/utils";
 
@@ -136,26 +139,21 @@ export default function EditarEvento() {
         </Campo>
 
         <Campo label="Modalidade">
-          <select
+          <Seletor
             name="modalidade"
-            defaultValue={evento.modalidade}
-            className={selecao}
-          >
-            {Object.entries(MODALIDADES).map(([valor, rotulo]) => (
-              <option key={valor} value={valor}>
-                {rotulo}
-              </option>
-            ))}
-          </select>
+            valorInicial={evento.modalidade}
+            opcoes={Object.entries(MODALIDADES).map(([valor, rotulo]) => ({
+              valor,
+              rotulo,
+            }))}
+          />
         </Campo>
 
         <Campo label="Data">
-          <input
+          <CampoData
             name="data"
-            type="date"
-            defaultValue={evento.data}
-            required
-            className={entrada}
+            valorInicial={evento.data}
+            permitirFuturo
           />
         </Campo>
 
@@ -320,6 +318,7 @@ export default function EditarEvento() {
               <thead>
                 <tr className="border-b border-linha text-left">
                   {[
+                    "Nº peito",
                     "Nome",
                     "Contato",
                     "Idade",
@@ -340,6 +339,11 @@ export default function EditarEvento() {
                     key={p.id}
                     className="border-b border-linha last:border-0"
                   >
+                    <td className="px-4 py-3">
+                      <span className="display text-lg text-verde">
+                        {numeroDePeito(p.numeroPeito)}
+                      </span>
+                    </td>
                     <td className="px-4 py-3">{p.nome}</td>
                     <td className="px-4 py-3 font-mono text-xs text-musgo">
                       {p.email}
@@ -370,7 +374,7 @@ export default function EditarEvento() {
                 ))}
                 {participantes.length === 0 ? (
                   <tr>
-                    <td colSpan={7} className="px-4 py-10 text-musgo">
+                    <td colSpan={8} className="px-4 py-10 text-musgo">
                       Ninguém inscrito ainda. As inscrições feitas no site
                       aparecem aqui na hora.
                     </td>

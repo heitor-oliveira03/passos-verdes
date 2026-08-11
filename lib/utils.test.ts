@@ -41,12 +41,12 @@ test("planilha escapa aspas e mantém uma linha por participante", () => {
   const evento = SEED.eventos[0];
   const inscritos = SEED.inscricoes.filter((i) => i.eventoId === evento.id);
   const csv = planilhaCsv(evento, [
-    { ...inscritos[0], nome: 'Ana "Pace" Rodrigues' },
+    { ...inscritos[0], nome: 'Ana "Pace" Rodrigues', numeroPeito: 1 },
     ...inscritos.slice(1),
   ]);
 
   const linhas = csv.split("\r\n");
   assert.equal(linhas.length, inscritos.length + 1);
-  assert.ok(linhas[0].startsWith("﻿Nome;E-mail;"));
-  assert.ok(linhas[1].startsWith('"Ana ""Pace"" Rodrigues";'));
+  assert.ok(linhas[0].startsWith("﻿Número de peito;Nome;E-mail;"));
+  assert.ok(linhas[1].startsWith('"0001";"Ana ""Pace"" Rodrigues";'));
 });

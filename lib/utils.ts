@@ -32,6 +32,8 @@ export const dataCurta = (iso: string) =>
   diaCurto.format(new Date(iso)).replace(".", "");
 export const ano = (iso: string) => iso.slice(0, 4);
 export const preco = (valor: number) => moeda.format(valor);
+export const numeroDePeito = (numero: number | undefined) =>
+  String(numero ?? 0).padStart(4, "0");
 /** "2026-09" → "setembro de 2026". */
 export const mesLongo = (mes: string) => mesAno.format(new Date(`${mes}-01`));
 
@@ -88,6 +90,7 @@ export function idade(nascimento: string, referencia: string) {
 }
 
 const COLUNAS = [
+  "Número de peito",
   "Nome",
   "E-mail",
   "CPF",
@@ -111,6 +114,7 @@ export function planilhaCsv(evento: Evento, inscricoes: Inscricao[]) {
 
   const linhas = inscricoes.map((i) =>
     [
+      numeroDePeito(i.numeroPeito),
       i.nome,
       i.email,
       i.cpf ?? "",

@@ -113,9 +113,9 @@ export default function Home() {
       </section>
 
       <Faixa
-        src="/imagens/fotos/obrigado.jpg"
+        src="/imagens/fotos/nosso-muito-obrigado.jpeg"
         alt="Turma da Passos Verdes reunida com medalhas e a bandeira do time depois da prova"
-        className="object-bottom"
+        className="bg-tinta object-contain"
       />
 
       <section className="mx-auto max-w-350 px-5 py-28 sm:px-8">

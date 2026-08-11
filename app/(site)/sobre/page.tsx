@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Faixa } from "@/components/site/faixa";
+import { LinhaDoTempo } from "@/components/site/linha-do-tempo";
 import { Revelar } from "@/components/site/revelar";
 import { CIDADE } from "@/lib/seed";
 
@@ -9,40 +10,6 @@ export const metadata: Metadata = {
   description:
     "A Passos Verdes nasceu em março de 2025, em Santo Aleixo, da paixão pela corrida e da vontade de criar comunidade. Treinos em grupo, corridas de rua e provas kids.",
 };
-
-/** A cronologia é uma sequência de verdade — por isso ela é numerada por ano. */
-const LINHA_DO_TEMPO = [
-  {
-    ano: "mar 2025",
-    titulo: "O projeto nasce",
-    texto:
-      "Da paixão pela corrida e da vontade de criar uma comunidade vibrante em Santo Aleixo. Primeiro os treinos em grupo, abertos a todo mundo — do iniciante ao corredor experiente.",
-  },
-  {
-    ano: "2025",
-    titulo: "A primeira Corrida de Santo Aleixo",
-    texto:
-      "2,5 mil corredores, 7 km, um percurso com subidas, descidas e grandes retas. Largada na praça de Andorinhas e chegada na praça da Capela.",
-  },
-  {
-    ano: "2025",
-    titulo: "Nasce a Kids",
-    texto:
-      "Baterias por faixa etária no fim de semana da prova principal. Todas as crianças com medalha na primeira edição.",
-  },
-  {
-    ano: "abr 2026",
-    titulo: "Um ano de Passos Verdes",
-    texto:
-      "A Corrida Passos Verdes fechou o primeiro ano do projeto com a turma inteira na linha de chegada.",
-  },
-  {
-    ano: "2026",
-    titulo: "Quatro provas na temporada",
-    texto:
-      "Corrida Passos Verdes, Santo Aleixo, Kids Minecraft e Garytos. O calendário do ano fechado de ponta a ponta.",
-  },
-];
 
 const PRINCIPIOS = [
   {
@@ -92,29 +59,18 @@ export default function Sobre() {
 
       <section className="px-3 sm:px-5">
         <div className="mx-auto max-w-350 rounded-3xl bg-cal px-6 py-24 sm:rounded-4xl sm:px-12">
-          <p className="eyebrow text-musgo">Linha do tempo</p>
-          <Revelar seletor="li" className="mt-10">
-            <ol>
-              {LINHA_DO_TEMPO.map((item) => (
-                <li
-                  key={item.titulo}
-                  className="grid gap-x-8 gap-y-3 border-t border-linha py-8 sm:grid-cols-[6rem_1fr_1fr]"
-                >
-                  <span className="eyebrow pt-1 text-verde">{item.ano}</span>
-                  <h2 className="display text-2xl sm:text-3xl">
-                    {item.titulo}
-                  </h2>
-                  <p className="text-musgo">{item.texto}</p>
-                </li>
-              ))}
-            </ol>
-          </Revelar>
+          <p className="eyebrow text-verde">Nossa trajetória</p>
+          <h2 className="display mt-5 max-w-3xl text-4xl sm:text-6xl">
+            Uma história construída a cada largada
+          </h2>
+          <LinhaDoTempo />
         </div>
       </section>
 
       <Faixa
-        src="/imagens/fotos/corredora.jpg"
-        alt="Corredora em prova de rua"
+        src="/imagens/fotos/sobre-passos-verdes.jpeg"
+        alt="Comunidade Passos Verdes reunida depois do treino"
+        className="bg-tinta object-contain"
       />
 
       <section className="mx-auto max-w-350 px-5 py-24 sm:px-8">

@@ -7,23 +7,35 @@ import { EntradaFormatada } from "@/components/ui/entrada-formatada";
 import { Seletor } from "@/components/ui/seletor";
 import { inscrever } from "@/lib/store";
 import type { Camiseta, Evento } from "@/lib/types";
-import { preco } from "@/lib/utils";
+import { numeroDePeito, preco } from "@/lib/utils";
 
 const CAMISETAS: Camiseta[] = ["PP", "P", "M", "G", "GG"];
 
 export function FormularioInscricao({ evento }: { evento: Evento }) {
-  const [confirmado, setConfirmado] = useState<string | null>(null);
+  const [confirmado, setConfirmado] = useState<{
+    nome: string;
+    numeroPeito: number;
+  } | null>(null);
 
   if (confirmado) {
     return (
       <div className="rounded-3xl border border-verde bg-verde-claro p-8">
         <p className="eyebrow text-verde">Inscrição confirmada</p>
         <h3 className="display mt-4 text-3xl">
-          Até {evento.horario}, {confirmado}.
+          Até {evento.horario}, {confirmado.nome}.
         </h3>
+        <div className="mt-6 flex items-center justify-between gap-5 rounded-2xl border border-verde/25 bg-branco/70 p-5">
+          <div>
+            <p className="eyebrow text-musgo">Seu número de peito</p>
+            <p className="mt-2 text-sm text-tinta/70">Guarde este número para a retirada do kit.</p>
+          </div>
+          <strong className="display text-4xl text-verde sm:text-5xl">
+            {numeroDePeito(confirmado.numeroPeito)}
+          </strong>
+        </div>
         <p className="mt-4 text-tinta/70">
-          O comprovante e o número de peito chegam por e-mail até 48 horas antes
-          da largada. A retirada do kit abre na véspera, no {evento.local}.
+          A retirada do kit abre na véspera, no {evento.local}. Seu número é
+          exclusivo nesta prova e também constará na lista da organização.
         </p>
         <button
           type="button"
@@ -38,7 +50,7 @@ export function FormularioInscricao({ evento }: { evento: Evento }) {
 
   function aoEnviar(dadosDoForm: FormData) {
     const nome = String(dadosDoForm.get("nome") ?? "").trim();
-    inscrever({
+    const inscricao = inscrever({
       eventoId: evento.id,
       nome,
       email: String(dadosDoForm.get("email") ?? "").trim(),
@@ -50,7 +62,10 @@ export function FormularioInscricao({ evento }: { evento: Evento }) {
       camiseta: dadosDoForm.get("camiseta") as Camiseta,
       equipe: String(dadosDoForm.get("equipe") ?? "").trim(),
     });
-    setConfirmado(nome.split(" ")[0]);
+    setConfirmado({
+      nome: nome.split(" ")[0],
+      numeroPeito: inscricao.numeroPeito ?? 0,
+    });
   }
 
   return (

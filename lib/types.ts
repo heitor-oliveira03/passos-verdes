@@ -37,6 +37,8 @@ export type Evento = {
   imagem: string;
   descricao: string;
   publicado: boolean;
+  /** Próximo número ainda não utilizado na sequência exclusiva da prova. */
+  proximoNumeroPeito?: number;
 };
 
 export type Camiseta = "PP" | "P" | "M" | "G" | "GG";
@@ -55,6 +57,8 @@ export type Inscricao = {
   camiseta: Camiseta;
   equipe: string;
   criadaEm: string;
+  /** Número único e imutável dentro do evento. Opcional para dados legados. */
+  numeroPeito?: number;
 };
 
 export type Dados = {

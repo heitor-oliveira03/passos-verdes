@@ -17,7 +17,48 @@ const CHAVE = "passos-verdes/dados/v3";
 const CHAVE_SESSAO = "passos-verdes/admin";
 const SENHA = "verde2026";
 
-let dados: Dados = SEED;
+/**
+ * Migra inscrições anteriores à numeração de peito. A ordem de cadastro é a
+ * política usada por plataformas de prova; números existentes nunca mudam.
+ */
+function normalizarNumerosDePeito(origem: Dados): Dados {
+  const inscricoes = origem.inscricoes.map((inscricao) => ({ ...inscricao }));
+  const eventos = origem.eventos.map((evento) => {
+    const participantes = inscricoes
+      .filter((inscricao) => inscricao.eventoId === evento.id)
+      .sort((a, b) =>
+        a.criadaEm.localeCompare(b.criadaEm) || a.id.localeCompare(b.id),
+      );
+    const utilizados = new Set(
+      participantes
+        .map((inscricao) => inscricao.numeroPeito)
+        .filter(
+          (numero): numero is number =>
+            typeof numero === "number" && Number.isInteger(numero) && numero > 0,
+        ),
+    );
+    let proximo = 1;
+
+    for (const participante of participantes) {
+      if (!participante.numeroPeito || participante.numeroPeito < 1) {
+        while (utilizados.has(proximo)) proximo += 1;
+        participante.numeroPeito = proximo;
+        utilizados.add(proximo);
+      }
+      proximo = Math.max(proximo, participante.numeroPeito + 1);
+    }
+
+    return {
+      ...evento,
+      proximoNumeroPeito: Math.max(evento.proximoNumeroPeito ?? 1, proximo),
+    };
+  });
+
+  return { ...origem, eventos, inscricoes };
+}
+
+const DADOS_INICIAIS = normalizarNumerosDePeito(SEED);
+let dados: Dados = DADOS_INICIAIS;
 let hidratado = false;
 const ouvintes = new Set<() => void>();
 
@@ -26,7 +67,7 @@ function hidratar() {
   hidratado = true;
   try {
     const bruto = localStorage.getItem(CHAVE);
-    if (bruto) dados = JSON.parse(bruto) as Dados;
+    if (bruto) dados = normalizarNumerosDePeito(JSON.parse(bruto) as Dados);
   } catch {
     // Storage indisponível ou corrompido: segue com a seed.
   }
@@ -53,7 +94,7 @@ function subscrever(ouvir: () => void) {
 }
 
 const lerCliente = () => dados;
-const lerServidor = () => SEED;
+const lerServidor = () => DADOS_INICIAIS;
 
 export function useDados(): Dados {
   return useSyncExternalStore(subscrever, lerCliente, lerServidor);
@@ -134,14 +175,31 @@ export function eventoVazio(): Evento {
 
 /* ---------- inscrições ---------- */
 
-export function inscrever(inscricao: Omit<Inscricao, "id" | "criadaEm">) {
+export function inscrever(
+  inscricao: Omit<Inscricao, "id" | "criadaEm" | "numeroPeito">,
+) {
+  const evento = dados.eventos.find((item) => item.id === inscricao.eventoId);
+  const maiorExistente = dados.inscricoes
+    .filter((item) => item.eventoId === inscricao.eventoId)
+    .reduce((maior, item) => Math.max(maior, item.numeroPeito ?? 0), 0);
+  const numeroPeito = Math.max(evento?.proximoNumeroPeito ?? 1, maiorExistente + 1);
+  const novaInscricao: Inscricao = {
+    ...inscricao,
+    id: id(),
+    criadaEm: new Date().toISOString(),
+    numeroPeito,
+  };
+
   gravar({
     ...dados,
-    inscricoes: [
-      ...dados.inscricoes,
-      { ...inscricao, id: id(), criadaEm: new Date().toISOString() },
-    ],
+    eventos: dados.eventos.map((item) =>
+      item.id === inscricao.eventoId
+        ? { ...item, proximoNumeroPeito: numeroPeito + 1 }
+        : item,
+    ),
+    inscricoes: [...dados.inscricoes, novaInscricao],
   });
+  return novaInscricao;
 }
 
 export function removerInscricao(inscricaoId: string) {

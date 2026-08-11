@@ -30,12 +30,35 @@ function formatarDigitacao(valor: string) {
     .join("/");
 }
 
-export function CampoData({ name }: { name: string }) {
+function textoDoIso(valor: string) {
+  const resultado = /^(\d{4})-(\d{2})-(\d{2})$/.exec(valor);
+  return resultado ? `${resultado[3]}/${resultado[2]}/${resultado[1]}` : "";
+}
+
+function mesDoIso(valor: string, fallback: Date) {
+  const resultado = /^(\d{4})-(\d{2})-\d{2}$/.exec(valor);
+  return resultado
+    ? new Date(Number(resultado[1]), Number(resultado[2]) - 1, 1)
+    : fallback;
+}
+
+export function CampoData({
+  name,
+  valorInicial = "",
+  permitirFuturo = false,
+}: {
+  name: string;
+  valorInicial?: string;
+  permitirFuturo?: boolean;
+}) {
   const hoje = new Date();
-  const [texto, setTexto] = useState("");
+  const mesPadrao = permitirFuturo
+    ? new Date(hoje.getFullYear(), hoje.getMonth(), 1)
+    : new Date(hoje.getFullYear() - 18, hoje.getMonth(), 1);
+  const [texto, setTexto] = useState(() => textoDoIso(valorInicial));
   const [aberto, setAberto] = useState(false);
   const [mesVisivel, setMesVisivel] = useState(
-    () => new Date(hoje.getFullYear() - 18, hoje.getMonth(), 1),
+    () => mesDoIso(valorInicial, mesPadrao),
   );
   const raiz = useRef<HTMLDivElement>(null);
   const calendarioId = useId();
@@ -117,7 +140,7 @@ export function CampoData({ name }: { name: string }) {
               const data = new Date(mesVisivel.getFullYear(), mesVisivel.getMonth(), dia);
               const iso = isoLocal(data);
               const selecionado = iso === valorIso;
-              const futuro = data > hoje;
+              const futuro = !permitirFuturo && data > hoje;
               return (
                 <button
                   key={dia}

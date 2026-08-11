@@ -1,106 +1,33 @@
-"use client";
+import Image from "next/image";
 
-import { useState } from "react";
-import { Seta } from "@/components/ui/seta";
-
-/**
- * Quem monta a prova, um de cada vez. Não passa pelo admin: a equipe muda
- * uma vez por ano, editar aqui é mais barato que uma tela de CRUD.
- *
- * ponytail: retratos de exemplo (public/imagens/creditos.txt). Trocar pelas
- * fotos reais da equipe antes de publicar.
- */
 const TIME = [
-  {
-    nome: "Guilherme Nogueira",
-    cargo: "Criador e maratonista",
-    foto: "/imagens/time/rafael.jpg",
-    texto: "Guilherme é o criador....",
-  },
-  {
-    nome: "Steffani Magalhães",
-    cargo: "Maratonista",
-    foto: "/imagens/time/marina.jpg",
-    texto: "criadora.....",
-  },
-  {
-    nome: "Thiago SOuza",
-    cargo: "Percurso",
-    foto: "/imagens/time/caio.jpg",
-    texto: "Trabalha com ed. fisica desde a primeira edição.",
-  },
-  {
-    nome: "Theo Gouveia",
-    cargo: "Maratonista",
-    foto: "/imagens/time/tiago.jpg",
-    texto: "Maratonista",
-  },
+  { nome: "Theo Gouveia", cargo: "Criador · Estratégia", foto: "/imagens/time/theo-gouveia.jpeg", texto: "Corredor e apaixonado por transformar movimento em comunidade. Theo acompanha as ideias desde o primeiro rascunho e conecta propósito, experiência e cada detalhe que acontece antes da largada." },
+  { nome: "Stefany Magalhães", cargo: "Criadora · Comunidade", foto: "/imagens/time/stefany-magalhaes.jpeg", texto: "Maratonista e ponte entre a equipe e quem corre com a gente. Stefany ajuda a construir uma experiência acolhedora, próxima e organizada para atletas de todos os ritmos." },
+  { nome: "Guilherme", cargo: "Criador · Operações", foto: "/imagens/time/guilherme.jpeg", texto: "Da planilha ao pórtico, Guilherme transforma planejamento em prova entregue. Atua na organização das frentes operacionais e mantém cada etapa caminhando no ritmo certo." },
+  { nome: "Thiago Souza", cargo: "Criador · Percurso", foto: "/imagens/time/thiago-souza.jpeg", texto: "Conhece a corrida por dentro e leva esse olhar para a rua. Thiago participa da definição dos percursos, da experiência esportiva e dos cuidados que fazem cada quilômetro funcionar." },
 ];
 
 export function Time() {
-  const [atual, setAtual] = useState(0);
-  const pessoa = TIME[atual];
-  const ir = (passo: number) =>
-    setAtual((i) => (i + passo + TIME.length) % TIME.length);
-
   return (
-    <section id="time" className="scroll-mt-20 px-3 sm:px-5">
-      <div className="mx-auto max-w-350 rounded-3xl bg-cal px-6 py-16 sm:rounded-4xl sm:px-12 sm:py-20">
-        <p className="eyebrow text-verde">Nosso time</p>
-        <h2 className="display mt-5 max-w-2xl text-4xl sm:text-6xl">
-          Quatro pessoas
-          <br />
-          montam a largada
-        </h2>
-
-        <div className="mt-12 grid items-center gap-10 sm:grid-cols-[auto_1fr]">
-          {/* eslint-disable-next-line @next/next/no-img-element -- retrato local pequeno, sem ganho no otimizador */}
-          <img
-            key={pessoa.foto}
-            src={pessoa.foto}
-            alt={pessoa.nome}
-            width={128}
-            height={128}
-            className="size-36 rounded-full object-cover ring-4 ring-verde/25 sm:h-44 sm:w-44"
-          />
-
-          <div>
-            <p className="eyebrow text-musgo">{pessoa.cargo}</p>
-            <h3 className="display mt-3 text-3xl sm:text-4xl">{pessoa.nome}</h3>
-            <p className="mt-4 max-w-xl text-musgo">{pessoa.texto}</p>
-          </div>
+    <section id="time" className="scroll-mt-20 px-3 py-20 sm:px-5 sm:py-28">
+      <div className="relative mx-auto max-w-350 overflow-hidden rounded-3xl bg-mata px-6 py-16 text-branco sm:rounded-4xl sm:px-12 sm:py-24">
+        <div aria-hidden className="absolute -right-28 -top-28 size-96 rounded-full border-[64px] border-verde/10" />
+        <div className="relative grid gap-8 lg:grid-cols-[1fr_.72fr] lg:items-end">
+          <div><p className="eyebrow text-verde">Quem faz acontecer</p><h2 className="display mt-5 max-w-3xl text-4xl sm:text-6xl lg:text-7xl">Quatro histórias. <span className="text-verde">Uma só largada.</span></h2></div>
+          <p className="max-w-xl text-base leading-7 text-white/60 lg:pb-1">A Passos Verdes nasceu do encontro entre pessoas que acreditam que correr pode aproximar uma cidade inteira. Estratégia, comunidade, operação e percurso trabalham juntos em cada prova.</p>
         </div>
-
-        <div className="mt-12 flex items-center gap-4">
-          {[
-            { passo: -1, para: "esquerda", rotulo: "Pessoa anterior" },
-            { passo: 1, para: "direita", rotulo: "Próxima pessoa" },
-          ].map((b) => (
-            <button
-              key={b.passo}
-              type="button"
-              onClick={() => ir(b.passo)}
-              aria-label={b.rotulo}
-              className="flex size-11 items-center justify-center rounded-full border border-linha bg-branco text-lg transition-all hover:scale-110 hover:border-verde hover:text-verde"
-            >
-              <Seta para={b.para as "esquerda" | "direita"} />
-            </button>
+        <div className="relative mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {TIME.map((pessoa, indice) => (
+            <article key={pessoa.nome} className={`group ${indice % 2 ? "lg:mt-12" : ""}`}>
+              <div className="relative aspect-4/5 overflow-hidden rounded-2xl bg-tinta">
+                <Image src={pessoa.foto} alt={`${pessoa.nome} correndo`} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" className="object-cover grayscale-[20%] transition duration-700 group-hover:scale-105 group-hover:grayscale-0" />
+                <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-tinta via-transparent to-transparent opacity-75" />
+                <span className="eyebrow absolute left-4 top-4 rounded-full bg-tinta/70 px-3 py-2 text-verde backdrop-blur">0{indice + 1}</span>
+                <div className="absolute inset-x-0 bottom-0 p-5"><p className="eyebrow text-verde">{pessoa.cargo}</p><h3 className="display mt-3 text-2xl text-white">{pessoa.nome}</h3></div>
+              </div>
+              <p className="mt-5 text-sm leading-6 text-white/55">{pessoa.texto}</p>
+            </article>
           ))}
-
-          <div className="ml-2 flex gap-2">
-            {TIME.map((p, i) => (
-              <button
-                key={p.nome}
-                type="button"
-                onClick={() => setAtual(i)}
-                aria-label={`Ver ${p.nome}`}
-                aria-current={i === atual}
-                className={`h-1.5 rounded-full transition-all duration-500 ${
-                  i === atual ? "w-10 bg-verde" : "w-5 bg-musgo/35"
-                }`}
-              />
-            ))}
-          </div>
         </div>
       </div>
     </section>
