@@ -8,6 +8,9 @@ services:
       - "5432:5432"
     volumes:
       - dados:/var/lib/postgresql/data
+      # A imagem roda os .sql daqui quando o volume está vazio. Assim um banco
+      # novo já nasce com as tabelas, em vez de exigir psql -f na mão.
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
 
 # Volume nomeado: o banco sobrevive ao `docker compose down`.
 # Sem isso, derrubar o container apagaria tudo.
