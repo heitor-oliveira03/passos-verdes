@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "es2023",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "lib": ["es2023"],
+    "types": ["node"],
+
+    // O Node roda .ts apagando os tipos, sem compilar. Por isso os imports
+    // levam a extensão .ts e o tsc só confere — nunca emite.
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "verbatimModuleSyntax": true,
+    // Barra sintaxe que o Node não consegue apagar (enum, namespace,
+    // parameter properties). Erro no editor em vez de erro em produção.
+    "erasableSyntaxOnly": true,
+
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "skipLibCheck": true
+  },
+  "include": ["src/**/*.ts"]
+}

@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { conferirSenha, gerarHash } from "./senha.js";
+import { conferirSenha, gerarHash } from "./senha.ts";
 
 test("senha certa entra, senha errada não", async () => {
   const guardado = await gerarHash("verde2026");
@@ -11,6 +11,7 @@ test("senha certa entra, senha errada não", async () => {
 test("hash corrompido nega em vez de explodir", async () => {
   assert.ok(!(await conferirSenha("verde2026", "lixo")));
   assert.ok(!(await conferirSenha("verde2026", "")));
+  assert.ok(!(await conferirSenha("verde2026", undefined)));
   assert.ok(!(await conferirSenha("verde2026", "salt:naoehex")));
 });
 
